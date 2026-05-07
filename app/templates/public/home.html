@@ -43,36 +43,34 @@
     ========================= */
     .site-header {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-      height: 72px; padding: 0 5%;
+      height: 68px; padding: 0 5%;
       display: flex; align-items: center; justify-content: space-between;
-      background: linear-gradient(to bottom, rgba(0,20,14,0.88), rgba(0,20,14,0.12));
+      background: linear-gradient(to bottom, rgba(0,20,14,0.9), rgba(0,20,14,0.1));
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
     .header-brand {
-      font-size: 1.2rem; font-weight: 700; letter-spacing: -0.03em;
+      font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em;
       color: var(--gold-soft); white-space: nowrap;
     }
-    .header-nav { display: flex; gap: 2.5rem; }
+    .header-nav { display: flex; gap: 2.2rem; }
     .header-nav a {
-      color: rgba(252,250,247,0.82); text-decoration: none;
-      font-size: 0.66rem; font-weight: 600; letter-spacing: 0.2em;
+      color: rgba(252,250,247,0.8); text-decoration: none;
+      font-size: 0.64rem; font-weight: 600; letter-spacing: 0.18em;
       text-transform: uppercase; transition: color .3s ease;
     }
     .header-nav a:hover { color: var(--gold-prime); }
     .header-cta {
-      height: 38px; padding: 0 22px; display: flex; align-items: center;
-      border: 1px solid rgba(197,160,89,0.6); color: var(--gold-soft);
-      text-decoration: none; font-size: 0.64rem; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase;
+      height: 36px; padding: 0 20px; display: flex; align-items: center;
+      border: 1px solid rgba(197,160,89,0.55); color: var(--gold-soft);
+      text-decoration: none; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
       transition: all .35s cubic-bezier(0.19,1,0.22,1);
     }
     .header-cta:hover { background: var(--gold-prime); color: #02110c; }
 
     /* ============================================================
-       HERO STAGE
-       TOTAL LOOP DURATION: 5s
-       Change the "5s" in ALL animation properties below to adjust
+       HERO STAGE — 4s LOOP
     ============================================================ */
     .hero-stage {
       position: relative; min-height: 100vh; overflow: hidden; background: #02110c;
@@ -83,148 +81,205 @@
     .hero-master-video video {
       width: 100%; height: 100%; object-fit: cover;
       filter: brightness(0.5) saturate(0.78) contrast(1.04);
-      animation: heroVideoMotion 5s cubic-bezier(0.76,0,0.24,1) infinite;
+      animation: heroVideoMotion 4s cubic-bezier(0.76,0,0.24,1) infinite;
       transform-origin: center center;
     }
 
-    /*
-      VIDEO MOTION
-      translateX(140px) = rightward push (higher = more right)
-      scale(1.24)       = starting zoom
-      scale(1)          = zoomed out
-    */
     @keyframes heroVideoMotion {
-      0%, 28%   { transform: scale(1.24) translateX(0px); }
-      44%, 64%  { transform: scale(1) translateX(140px); }
+      0%, 25%   { transform: scale(1.24) translateX(0px); }
+      40%, 65%  { transform: scale(1) translateX(200px); }
       100%      { transform: scale(1.24) translateX(0px); }
+    }
+
+    /* 
+      GREEN MENU PANEL
+      z-index: 8 ABOVE text panel
+      Links positioned HIGH, close to header
+    */
+    .green-menu-panel {
+      position: absolute; top: 0; left: 0; width: 26%; height: 100%;
+      z-index: 8;
+      background: linear-gradient(
+        90deg,
+        rgba(0,26,20,0.96) 0%,
+        rgba(0,30,22,0.88) 55%,
+        rgba(0,20,14,0.35) 80%,
+        rgba(0,20,14,0.02) 100%
+      );
+      backdrop-filter: blur(8px);
+      display: flex; flex-direction: column; justify-content: flex-start;
+      padding: 5rem 2rem 2rem;
+      opacity: 0; pointer-events: none;
+      animation: menuPanelReveal 4s cubic-bezier(0.76,0,0.24,1) infinite;
+    }
+
+    @keyframes menuPanelReveal {
+      0%, 28%   { opacity: 0; pointer-events: none; }
+      40%, 65%  { opacity: 1; pointer-events: auto; }
+      100%      { opacity: 0; pointer-events: none; }
+    }
+
+    .menu-subtitle {
+      font-size: 0.56rem; font-weight: 700; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--gold-prime);
+      margin-bottom: 1rem;
+    }
+
+    /* MENU BUTTONS — clickable, compact */
+    .menu-buttons {
+      display: flex; flex-direction: column; gap: 0.4rem;
+      position: relative; z-index: 9;
+    }
+    .menu-btn {
+      display: block; width: 100%; text-align: left;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.07);
+      color: rgba(252,250,247,0.85);
+      padding: 0.6rem 0.9rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.74rem; font-weight: 500;
+      text-decoration: none; cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+      pointer-events: auto;
+    }
+    .menu-btn:hover {
+      background: rgba(197,160,89,0.12);
+      border-color: rgba(197,160,89,0.28);
+      color: var(--gold-soft);
+      padding-left: 1.3rem;
     }
 
     /* ATMOSPHERIC OVERLAY */
     .hero-stage::before {
       content: ""; position: absolute; inset: 0; z-index: 2;
       background:
-        radial-gradient(circle at top right, rgba(197,160,89,0.06), transparent 30%),
-        linear-gradient(90deg, rgba(0,20,14,0.78) 0%, rgba(0,20,14,0.38) 35%, rgba(0,20,14,0.04) 72%, rgba(0,20,14,0.01) 100%);
+        radial-gradient(circle at top right, rgba(197,160,89,0.05), transparent 30%),
+        linear-gradient(90deg, rgba(0,20,14,0.7) 0%, rgba(0,20,14,0.25) 30%, rgba(0,20,14,0.03) 65%, transparent 100%);
     }
 
     /* AMBIENT BLOOM */
     .hero-stage::after {
-      content: ""; position: absolute; width: 500px; height: 500px;
-      top: -140px; right: -120px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(197,160,89,0.07), transparent 70%);
-      filter: blur(60px); z-index: 2; pointer-events: none;
-      animation: ambientFloat 5s ease-in-out infinite;
+      content: ""; position: absolute; width: 400px; height: 400px;
+      top: -100px; right: -80px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(197,160,89,0.05), transparent 70%);
+      filter: blur(50px); z-index: 2; pointer-events: none;
+      animation: ambientFloat 4s ease-in-out infinite;
     }
     @keyframes ambientFloat {
       0%, 100% { transform: translateY(0px) translateX(0px); }
-      50%      { transform: translateY(16px) translateX(-12px); }
+      50%      { transform: translateY(12px) translateX(-8px); }
     }
 
-    /* TEXT PANEL */
+    /* 
+      TEXT PANEL — z-index: 6 BELOW menu panel (z-index: 8)
+      pointer-events: none so clicks pass through to menu
+      Text stays ABOVE the green visually because it's positioned lower
+    */
     .hero-text-panel {
       position: absolute; inset: 0; z-index: 6;
       display: flex; align-items: center; justify-content: center; padding: 0;
-      animation: heroPanelShift 5s cubic-bezier(0.76,0,0.24,1) infinite;
+      animation: heroPanelShift 4s cubic-bezier(0.76,0,0.24,1) infinite;
+      pointer-events: none;
     }
 
-    /*
-      TEXT DRIFT
-      translateX(-18%) = leftward movement (higher = further left)
-      scale(0.7)       = shrunk size at left (lower = smaller)
-    */
+    .hero-text-inner {
+      pointer-events: auto;
+    }
+
     @keyframes heroPanelShift {
-      0%, 28%   { transform: translateX(0%) scale(1); }
-      44%, 64%  { transform: translateX(-18%) scale(0.7); }
+      0%, 25%   { transform: translateX(0%) scale(1); }
+      40%, 65%  { transform: translateX(-20%) scale(0.68); }
       100%      { transform: translateX(0%) scale(1); }
     }
 
     /* GLASS CARD */
     .hero-text-inner {
-      width: min(680px, 88vw);
-      padding: 3rem 2.8rem; text-align: center;
-      position: relative; overflow: hidden; border-radius: 24px;
+      width: min(640px, 85vw);
+      padding: 2.8rem 2.5rem; text-align: center;
+      position: relative; overflow: hidden; border-radius: 22px;
       transform-origin: center left;
-      animation: panelMaterialize 5s cubic-bezier(0.76,0,0.24,1) infinite;
+      animation: panelMaterialize 4s cubic-bezier(0.76,0,0.24,1) infinite;
     }
 
     @keyframes panelMaterialize {
-      0%, 28%   { backdrop-filter: blur(0px); background: rgba(255,255,255,0); border: 1px solid transparent; box-shadow: none; }
-      44%, 64%  { backdrop-filter: blur(16px); background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)); border: 1px solid rgba(197,160,89,0.14); box-shadow: 0 28px 70px rgba(0,0,0,0.4); }
-      100%      { backdrop-filter: blur(0px); background: rgba(255,255,255,0); border: 1px solid transparent; box-shadow: none; }
+      0%, 25%   { backdrop-filter: blur(0px); background: transparent; border: 1px solid transparent; box-shadow: none; }
+      40%, 65%  { backdrop-filter: blur(16px); background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)); border: 1px solid rgba(197,160,89,0.14); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+      100%      { backdrop-filter: blur(0px); background: transparent; border: 1px solid transparent; box-shadow: none; }
     }
 
     /* GOLD EDGE */
     .hero-text-inner::before {
       content: ""; position: absolute; top: 0; left: 0;
       width: 1px; height: 100%;
-      background: linear-gradient(to bottom, transparent, rgba(197,160,89,0.5), transparent);
+      background: linear-gradient(to bottom, transparent, rgba(197,160,89,0.45), transparent);
       opacity: 0;
-      animation: accentReveal 5s cubic-bezier(0.76,0,0.24,1) infinite;
+      animation: accentReveal 4s cubic-bezier(0.76,0,0.24,1) infinite;
     }
     .hero-text-inner::after {
       content: ""; position: absolute; top: 0; left: 0;
-      width: 40px; height: 1px;
-      background: linear-gradient(to right, rgba(197,160,89,0.6), transparent);
+      width: 36px; height: 1px;
+      background: linear-gradient(to right, rgba(197,160,89,0.55), transparent);
       opacity: 0;
-      animation: accentReveal 5s cubic-bezier(0.76,0,0.24,1) infinite;
+      animation: accentReveal 4s cubic-bezier(0.76,0,0.24,1) infinite;
     }
     @keyframes accentReveal {
-      0%, 28%   { opacity: 0; }
-      44%, 64%  { opacity: 1; }
+      0%, 25%   { opacity: 0; }
+      40%, 65%  { opacity: 1; }
       100%      { opacity: 0; }
     }
 
     /* LOGO */
     .ces-hero-logo {
-      width: 62px; margin: 0 auto 1.2rem; display: block;
-      filter: drop-shadow(0 6px 14px rgba(197,160,89,0.22));
+      width: 58px; margin: 0 auto 1rem; display: block;
+      filter: drop-shadow(0 5px 12px rgba(197,160,89,0.2));
     }
 
     /* EYEBROW */
     .hero-eyebrow {
-      font-size: 0.56rem; font-weight: 700; letter-spacing: 0.32em;
+      font-size: 0.54rem; font-weight: 700; letter-spacing: 0.3em;
       text-transform: uppercase; color: var(--gold-prime);
-      margin-bottom: 0.7rem; text-align: center;
+      margin-bottom: 0.6rem; text-align: center;
     }
 
     /* TITLE */
     .hero-title {
-      font-size: clamp(2.5rem, 5.5vw, 4.8rem); font-weight: 700;
+      font-size: clamp(2.3rem, 5vw, 4.4rem); font-weight: 700;
       line-height: 0.92; color: var(--white-soft);
-      margin-bottom: 0.9rem; text-align: center;
-      text-shadow: 0 4px 28px rgba(0,0,0,0.5); letter-spacing: -0.02em;
+      margin-bottom: 0.8rem; text-align: center;
+      text-shadow: 0 3px 24px rgba(0,0,0,0.5); letter-spacing: -0.02em;
     }
     .hero-title span {
       display: block; font-style: italic; font-weight: 700;
       background: linear-gradient(135deg, #c5a059 0%, #f4e9d5 45%, #c5a059 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; margin-top: 0.08rem;
+      background-clip: text; margin-top: 0.06rem;
     }
 
     /* DESCRIPTION */
     .hero-description {
-      font-size: 0.82rem; font-weight: 400; line-height: 1.6;
-      color: rgba(252,250,247,0.68);
-      margin: 0 auto 1.8rem; max-width: 420px; text-align: center;
+      font-size: 0.78rem; font-weight: 400; line-height: 1.55;
+      color: rgba(252,250,247,0.65);
+      margin: 0 auto 1.6rem; max-width: 400px; text-align: center;
     }
 
     /* BUTTON */
     .btn-premium {
       background: transparent; color: var(--gold-prime);
-      border: 1px solid var(--gold-prime); padding: 12px 26px;
-      font-size: 0.64rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.26em; background: rgba(0,20,14,0.28);
+      border: 1px solid var(--gold-prime); padding: 11px 24px;
+      font-size: 0.62rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.24em; background: rgba(0,20,14,0.25);
       backdrop-filter: blur(8px); cursor: pointer; display: inline-block;
       text-decoration: none; border-radius: 2px;
       transition: all 0.4s cubic-bezier(0.19,1,0.22,1);
     }
     .btn-premium:hover {
       background: var(--gold-prime); color: var(--emerald-abyss);
-      border-color: var(--gold-prime); box-shadow: 0 12px 30px rgba(197,160,89,0.28);
-      transform: translateY(-2px); letter-spacing: 0.3em;
+      border-color: var(--gold-prime); box-shadow: 0 10px 28px rgba(197,160,89,0.26);
+      transform: translateY(-2px); letter-spacing: 0.28em;
     }
     .hero-actions {
-      display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;
+      display: flex; gap: 0.7rem; flex-wrap: wrap; justify-content: center;
     }
 
     /* VIDEO REVEAL */
@@ -234,18 +289,13 @@
     .hero-video-reveal::before {
       content: ""; position: absolute; inset: 0;
       clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0;
-      background: linear-gradient(90deg, rgba(255,255,255,0.00), rgba(255,255,255,0.025));
-      backdrop-filter: blur(2px) brightness(1.04);
-      animation: revealMask 5s cubic-bezier(0.76,0,0.24,1) infinite;
+      background: linear-gradient(90deg, rgba(255,255,255,0.00), rgba(255,255,255,0.02));
+      backdrop-filter: blur(2px) brightness(1.03);
+      animation: revealMask 4s cubic-bezier(0.76,0,0.24,1) infinite;
     }
-    /*
-      REVEAL EDGE
-      polygon(26% 0, ..., 38% 100%) = how much video shows
-      Lower first % = more video visible on the right
-    */
     @keyframes revealMask {
       0%, 28%   { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
-      44%, 64%  { clip-path: polygon(26% 0, 100% 0, 100% 100%, 38% 100%); opacity: 1; }
+      40%, 65%  { clip-path: polygon(18% 0, 100% 0, 100% 100%, 28% 100%); opacity: 1; }
       100%      { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
     }
 
@@ -254,19 +304,19 @@
     ========================= */
     .site-footer {
       background: var(--emerald-abyss);
-      border-top: 1px solid rgba(197,160,89,0.08);
-      padding: 2rem 5%; display: flex;
+      border-top: 1px solid rgba(197,160,89,0.07);
+      padding: 1.8rem 5%; display: flex;
       justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1.5rem;
+      flex-wrap: wrap; gap: 1.2rem;
     }
     .footer-info p {
-      color: rgba(252,250,247,0.38); font-size: 0.65rem;
-      font-weight: 500; letter-spacing: 0.06em;
+      color: rgba(252,250,247,0.35); font-size: 0.62rem;
+      font-weight: 500; letter-spacing: 0.05em;
     }
-    .footer-links { display: flex; gap: 1.8rem; }
+    .footer-links { display: flex; gap: 1.6rem; }
     .footer-links a {
-      color: rgba(252,250,247,0.38); text-decoration: none;
-      font-size: 0.64rem; font-weight: 600; letter-spacing: 0.16em;
+      color: rgba(252,250,247,0.35); text-decoration: none;
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em;
       text-transform: uppercase; transition: color 0.3s;
     }
     .footer-links a:hover { color: var(--gold-prime); }
@@ -275,36 +325,39 @@
        RESPONSIVE
     ========================= */
     @media (max-width: 1024px) {
-      .hero-text-inner { width: min(520px, 88vw); padding: 2.4rem 1.8rem; }
+      .green-menu-panel { width: 30%; padding: 4.5rem 1.8rem 2rem; }
+      .menu-btn { font-size: 0.68rem; padding: 0.5rem 0.8rem; }
+      .hero-text-inner { width: min(480px, 85vw); padding: 2.2rem 1.8rem; }
       @keyframes heroPanelShift {
-        0%, 28%   { transform: translateX(0%) scale(1); }
-        44%, 64%  { transform: translateX(-10%) scale(0.76); }
+        0%, 25%   { transform: translateX(0%) scale(1); }
+        40%, 65%  { transform: translateX(-12%) scale(0.74); }
         100%      { transform: translateX(0%) scale(1); }
       }
       @keyframes heroVideoMotion {
-        0%, 28%   { transform: scale(1.2) translateX(0px); }
-        44%, 64%  { transform: scale(1) translateX(80px); }
+        0%, 25%   { transform: scale(1.2) translateX(0px); }
+        40%, 65%  { transform: scale(1) translateX(120px); }
         100%      { transform: scale(1.2) translateX(0px); }
-      }
-      @keyframes revealMask {
-        0%, 28%   { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
-        44%, 64%  { clip-path: polygon(34% 0, 100% 0, 100% 100%, 48% 100%); opacity: 1; }
-        100%      { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
       }
     }
 
     @media (max-width: 768px) {
       .header-nav { display: none; }
-      .header-brand { font-size: 1rem; }
+      .header-brand { font-size: 0.95rem; }
+      .green-menu-panel {
+        position: relative; width: 100%; height: auto; min-height: auto;
+        opacity: 1; pointer-events: auto; animation: none;
+        padding: 4rem 1.6rem 1.5rem;
+        background: linear-gradient(180deg, rgba(0,26,20,0.96) 0%, rgba(0,20,14,0.2) 100%);
+      }
       .hero-text-panel { animation: none; transform: translateX(0) scale(1); }
       .hero-text-inner {
-        width: 100%; padding: 2rem 1.4rem; border-radius: 16px;
-        animation: none; backdrop-filter: blur(16px);
+        width: 100%; padding: 1.8rem 1.2rem; border-radius: 14px;
+        animation: none; backdrop-filter: blur(14px);
         background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
-        border: 1px solid rgba(197,160,89,0.14); box-shadow: 0 28px 70px rgba(0,0,0,0.4);
+        border: 1px solid rgba(197,160,89,0.14); box-shadow: 0 24px 60px rgba(0,0,0,0.4);
       }
       .hero-text-inner::before, .hero-text-inner::after { opacity: 1; }
-      .hero-title { font-size: 1.7rem; }
+      .hero-title { font-size: 1.6rem; }
       .hero-video-reveal::before { animation: none; clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
       .hero-master-video video { animation: none; transform: scale(1); }
       .site-footer { flex-direction: column; text-align: center; }
@@ -312,25 +365,7 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-brand">CONSTRUCT EXEC</div>
-    <nav class="header-nav">
-      <a href="#">Insights</a>
-      <a href="#">Home</a>
-      <a href="#">Firm</a>
-      <a href="#">Expertise</a>
-      <a href="#">Sectors</a>
-    </nav>
-    <a href="#" class="header-cta">Contact</a>
-  </header>
 
-  <!-- ============================================================
-       HERO — 5s LOOP
-       Change all "5s" to adjust total duration
-       Video push: see translateX(140px) in heroVideoMotion
-       Text left: see translateX(-18%) in heroPanelShift
-       Reveal width: see polygon % in revealMask
-  ============================================================ -->
   <section class="hero-stage">
     <div class="hero-master-video">
       <video autoplay muted loop playsinline>
@@ -338,8 +373,22 @@
       </video>
     </div>
 
+    <!-- GREEN MENU — links up high near header, z-index 8 above text -->
+    <div class="green-menu-panel">
+      <span class="menu-subtitle">Navigate</span>
+      <div class="menu-buttons">
+        <a href="#" class="menu-btn">Search for Jobs</a>
+        <a href="#" class="menu-btn">Search for Employers</a>
+        <a href="#" class="menu-btn">Sign Up</a>
+        <a href="#" class="menu-btn">Login</a>
+        <a href="#" class="menu-btn">Blogs &amp; Insights</a>
+        <a href="#" class="menu-btn">About CES</a>
+      </div>
+    </div>
+
     <div class="hero-video-reveal"></div>
 
+    <!-- TEXT PANEL — centered, z-index 6 below menu, text stays on top visually -->
     <div class="hero-text-panel">
       <div class="hero-text-inner">
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="CES" class="ces-hero-logo">
@@ -360,16 +409,7 @@
     </div>
   </section>
 
-  <footer class="site-footer">
-    <div class="footer-info">
-      <p>&copy; 2026 Construct Executive Search. All rights reserved.</p>
-    </div>
-    <div class="footer-links">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="#">LinkedIn</a>
-    </div>
-  </footer>
+
 </body>
 </html>
 {% endblock %}
