@@ -1,0 +1,1203 @@
+{% extends "public/base.html" %}
+
+{% block title %}Construct Executive Search | Zambia's Premier Leadership Partners{% endblock %}
+
+{% block content %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --emerald-deep: #003328;
+    --emerald-mid: #005240;
+    --emerald-light: #0a6b52;
+    --gold-rich: #c9a84c;
+    --gold-pale: #e8d5a3;
+    --obsidian: #0d0d0d;
+    --off-white: #f7f5f0;
+    --text-muted: #888880;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #2a2a2a;
+    background: #fff;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* Hero */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('/static/images/cesbg.png') center center / cover no-repeat;
+    animation: heroZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.12); }
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(0,51,40,0.75), rgba(0,20,14,0.92));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 0 8% 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+}
+
+.hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.hero-eyebrow span {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-rich);
+}
+
+.eyebrow-line {
+    width: 50px;
+    height: 1px;
+    background: var(--gold-rich);
+}
+
+.hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -1px;
+    margin-bottom: 32px;
+}
+
+.hero h1 em {
+    font-style: italic;
+    color: var(--gold-pale);
+}
+
+.hero h1 strong {
+    font-weight: 700;
+    display: block;
+}
+
+.hero-desc {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: rgba(232,213,163,0.85);
+    line-height: 1.7;
+    max-width: 460px;
+    margin-bottom: 48px;
+}
+
+.btn-primary, .btn-ghost {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    padding: 18px 42px;
+    background: var(--gold-rich);
+    color: var(--emerald-deep);
+    border: 2px solid var(--gold-rich);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--emerald-deep);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+}
+
+.btn-primary:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.btn-primary:hover {
+    color: var(--gold-rich);
+}
+
+.btn-primary span, .btn-ghost span {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-ghost {
+    padding: 17px 38px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.35);
+}
+
+.btn-ghost:hover {
+    border-color: var(--gold-rich);
+    color: var(--gold-pale);
+}
+
+.hero-auth {
+    margin-top: 32px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.hero-auth-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+}
+
+.hero-auth a {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.hero-auth a:hover, .hero-auth a.gold {
+    color: var(--gold-rich);
+}
+
+.hero-right {
+    border-left: 1px solid rgba(201,168,76,0.2);
+    padding-left: 60px;
+    padding-bottom: 12px;
+}
+
+.hero-stat {
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+
+.hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 600;
+    color: var(--gold-rich);
+    line-height: 1;
+    display: inline-block;
+}
+
+.hero-stat-suffix {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold-rich);
+    margin-left: 2px;
+}
+
+.hero-stat-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(232,213,163,0.6);
+    margin-top: 6px;
+}
+
+/* Marquee */
+.marquee-bar {
+    background: var(--gold-rich);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee-track {
+    display: inline-flex;
+    animation: marquee 30s linear infinite;
+}
+
+.marquee-track span {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--emerald-deep);
+    padding: 0 60px;
+}
+
+.marquee-track .sep {
+    color: rgba(0,51,40,0.4);
+    padding: 0;
+}
+
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Intro */
+.intro-section {
+    padding: 130px 8%;
+    background: #fff;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.intro-label {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 8px;
+}
+
+.intro-label .vert-line {
+    width: 2px;
+    height: 80px;
+    background: var(--gold-rich);
+}
+
+.intro-label span {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.intro-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--obsidian);
+    margin-bottom: 32px;
+}
+
+.intro-text h2 em {
+    font-style: italic;
+    color: var(--emerald-mid);
+}
+
+.intro-text p {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #555;
+    max-width: 640px;
+    margin-bottom: 20px;
+}
+
+.read-more {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--emerald-mid);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.read-more::after {
+    content: '→';
+    font-size: 14px;
+}
+
+/* Video */
+.video-section {
+    background: var(--emerald-deep);
+    padding: 120px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.video-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 24px;
+}
+
+.video-left h2 em {
+    font-style: italic;
+    color: var(--gold-pale);
+}
+
+.video-left p {
+    font-size: 0.88rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: rgba(232,213,163,0.75);
+    max-width: 460px;
+    margin-bottom: 36px;
+}
+
+.video-left a {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-rich);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: gap 0.3s;
+}
+
+.video-left a:hover {
+    gap: 18px;
+}
+
+.video-left a::after {
+    content: '→';
+    font-size: 14px;
+}
+
+.video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: 1px solid rgba(201,168,76,0.25);
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.video-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* Services */
+.services-section {
+    background: var(--off-white);
+    padding: 130px 8%;
+}
+
+.section-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 80px;
+}
+
+.section-head .tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-rich);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}
+
+.section-head h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    color: var(--obsidian);
+    line-height: 1.1;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 24px;
+}
+
+.section-head h2 em {
+    font-style: italic;
+    color: var(--emerald-mid);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+}
+
+.service-card {
+    background: #fff;
+    padding: 60px 48px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: default;
+    position: relative;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.08);
+}
+
+.service-card i {
+    font-size: 2.2rem;
+    color: var(--gold-rich);
+    margin-bottom: 20px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.service-card:hover i {
+    opacity: 1;
+}
+
+.service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--emerald-deep);
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.service-card p {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.s-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--emerald-mid);
+    text-decoration: none;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s;
+}
+
+.service-card:hover .s-link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.s-link::after {
+    content: '→';
+    font-size: 12px;
+}
+
+/* Process */
+.process-section {
+    background: var(--obsidian);
+    padding: 100px 8%;
+    overflow: hidden;
+}
+
+.process-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.process-header span {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold-rich);
+    display: block;
+    margin-bottom: 20px;
+}
+
+.process-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    color: #fff;
+}
+
+.process-header h2 em {
+    font-style: italic;
+    color: var(--gold-pale);
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    position: relative;
+}
+
+.process-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-rich), transparent);
+}
+
+.process-step {
+    padding: 0 24px;
+    text-align: center;
+}
+
+.step-dot {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--obsidian);
+    border: 2px solid var(--gold-rich);
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--gold-rich);
+    position: relative;
+    z-index: 1;
+}
+
+.process-step h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.process-step p {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.45);
+    font-weight: 400;
+}
+
+/* Sectors */
+.sectors-section {
+    padding: 130px 8%;
+    background: #fff;
+}
+
+.sectors-header {
+    margin-bottom: 70px;
+}
+
+.sectors-header span {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-rich);
+    display: block;
+    margin-bottom: 16px;
+}
+
+.sectors-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    color: var(--obsidian);
+}
+
+.sectors-header h2 em {
+    font-style: italic;
+    color: var(--emerald-mid);
+}
+
+.sectors-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+}
+
+.sector-item {
+    padding: 36px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    cursor: default;
+}
+
+.sector-item:nth-child(odd) {
+    border-right: 1px solid rgba(0,0,0,0.07);
+    padding-right: 60px;
+}
+
+.sector-item:nth-child(even) {
+    padding-left: 60px;
+}
+
+.sector-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--obsidian);
+    transition: color 0.3s;
+}
+
+.sector-item:hover .sector-name {
+    color: var(--emerald-mid);
+}
+
+.sector-arrow {
+    font-size: 1.2rem;
+    color: var(--gold-rich);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.3s;
+}
+
+.sector-item:hover .sector-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Testimonial */
+.testimonial-section {
+    background: linear-gradient(125deg, var(--emerald-deep), #002418);
+    padding: 130px 8%;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-section::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28rem;
+    font-weight: 700;
+    color: rgba(201,168,76,0.04);
+    position: absolute;
+    top: -60px;
+    left: 5%;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.testimonial-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-inner blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.5;
+    margin-bottom: 48px;
+}
+
+.testimonial-inner blockquote em {
+    color: var(--gold-pale);
+    font-style: normal;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.author-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gold-rich);
+}
+
+.author-info strong {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-rich);
+}
+
+.author-info span {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+}
+
+/* CTA */
+.cta-section {
+    background: var(--off-white);
+    padding: 140px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.cta-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    color: var(--obsidian);
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.cta-left h2 em {
+    font-style: italic;
+    color: var(--emerald-mid);
+}
+
+.cta-left p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #777;
+    max-width: 460px;
+}
+
+.cta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cta-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 28px;
+    background: #fff;
+    width: 100%;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
+
+.cta-contact-item:hover {
+    border-color: var(--gold-rich);
+    transform: translateX(8px);
+}
+
+.cta-contact-icon {
+    font-size: 1.6rem;
+    width: 40px;
+    color: var(--gold-rich);
+}
+
+.cta-contact-text strong {
+    display: block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.cta-contact-text span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--obsidian);
+}
+
+.cta-btns {
+    display: flex;
+    gap: 16px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+/* Footer */
+.footer-band {
+    background: var(--emerald-deep);
+    padding: 24px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-rich);
+}
+
+.footer-note {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.35);
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    .hero-right {
+        border-left: none;
+        padding-left: 0;
+        display: flex;
+        flex-wrap: wrap;
+        border-top: 1px solid rgba(201,168,76,0.2);
+        padding-top: 40px;
+    }
+    .hero-stat {
+        padding: 20px 40px 20px 0;
+        border-bottom: none;
+        border-right: 1px solid rgba(201,168,76,0.15);
+    }
+    .hero-stat:last-child {
+        border-right: none;
+    }
+    .intro-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .intro-label {
+        flex-direction: row;
+        align-items: center;
+    }
+    .intro-label .vert-line {
+        width: 60px;
+        height: 2px;
+    }
+    .video-section {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .process-steps {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+    .process-steps::before {
+        display: none;
+    }
+    .cta-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: auto;
+    }
+    .hero-content {
+        padding: 80px 6% 60px;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    .sectors-list {
+        grid-template-columns: 1fr;
+    }
+    .sector-item:nth-child(odd) {
+        border-right: none;
+        padding-right: 0;
+    }
+    .sector-item:nth-child(even) {
+        padding-left: 0;
+    }
+    .process-steps {
+        grid-template-columns: 1fr 1fr;
+    }
+    .footer-band {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-left">
+            <div class="hero-eyebrow">
+                <div class="eyebrow-line"></div>
+                <span>Construct Executive Search · Zambia</span>
+            </div>
+            <h1>
+                <em>Zambia's</em> Premier<br>
+                <strong>Executive&nbsp;Search</strong> Firm
+            </h1>
+            <p class="hero-desc">
+                We connect Africa's most ambitious organizations with world-class C-suite and board-level leadership. Rigorous. Discreet. Results-led.
+            </p>
+            <div class="hero-actions">
+                <a href="/contact" class="btn-primary"><span>Start a Search</span></a>
+                <a href="/register/talent" class="btn-ghost"><span>Join as Talent</span></a>
+            </div>
+            <div class="hero-auth">
+                <span class="hero-auth-label">Platform access</span>
+                <a href="/login">Login</a>
+                <a href="/register/client">Register Company</a>
+                <a href="/register/talent" class="gold">Join Talent Pool</a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="hero-stat">
+                <span class="hero-stat-num" data-target="15">0</span><span class="hero-stat-suffix">+</span>
+                <div class="hero-stat-label">Years of Excellence</div>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat-num" data-target="500">0</span><span class="hero-stat-suffix">+</span>
+                <div class="hero-stat-label">Leaders Placed</div>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat-num" data-target="98">0</span><span class="hero-stat-suffix">%</span>
+                <div class="hero-stat-label">Retention Rate</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="marquee-bar" aria-hidden="true">
+    <div class="marquee-track">
+        <span>Executive Search</span><span class="sep">·</span>
+        <span>Board Advisory</span><span class="sep">·</span>
+        <span>Leadership Mapping</span><span class="sep">·</span>
+        <span>Mining & Resources</span><span class="sep">·</span>
+        <span>Financial Services</span><span class="sep">·</span>
+        <span>Infrastructure</span><span class="sep">·</span>
+        <span>Agriculture</span><span class="sep">·</span>
+        <span>Talent Intelligence</span><span class="sep">·</span>
+        <span>Southern Africa</span><span class="sep">·</span>
+        <span>Executive Search</span><span class="sep">·</span>
+        <span>Board Advisory</span><span class="sep">·</span>
+        <span>Leadership Mapping</span><span class="sep">·</span>
+        <span>Mining & Resources</span><span class="sep">·</span>
+        <span>Financial Services</span><span class="sep">·</span>
+        <span>Infrastructure</span><span class="sep">·</span>
+        <span>Agriculture</span><span class="sep">·</span>
+        <span>Talent Intelligence</span><span class="sep">·</span>
+        <span>Southern Africa</span><span class="sep">·</span>
+    </div>
+</div>
+
+<section class="intro-section">
+    <div class="intro-label">
+        <div class="vert-line"></div>
+        <span>Our Mandate</span>
+    </div>
+    <div class="intro-text">
+        <h2>We don't simply fill roles —<br>we shape the <em>leadership</em><br>of Zambia's future.</h2>
+        <p>Construct Executive Search (CES) is Zambia's foremost executive recruitment and leadership advisory practice. Founded on the belief that the right leader transforms everything, we serve a distinguished roster of clients across mining, finance, infrastructure, agriculture, and public sector.</p>
+        <p>Our research-led approach, deep market intelligence, and unwavering commitment to discretion have earned us the trust of both multinational corporations and Zambia's fastest-growing indigenous firms.</p>
+        <a href="/about" class="read-more">Discover Our Story</a>
+    </div>
+</section>
+
+<section class="video-section">
+    <div class="video-left">
+        <h2>See the <em>minds</em><br>behind the search</h2>
+        <p>Our team brings decades of combined experience in executive recruitment across Zambia and the wider Southern African region. Watch how we work — and why our clients trust us with their most critical hires.</p>
+        <a href="/contact">Schedule a Conversation</a>
+    </div>
+    <div class="video-right">
+        <div class="video-frame">
+            <iframe src="https://www.youtube.com/embed/opHOxNowaDw?si=aqTf4p-0wgH5aiXf&rel=0&color=white&modestbranding=1" title="Construct Executive Search — Company Overview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+<section class="services-section">
+    <div class="section-head">
+        <div class="tag">Our Services</div>
+        <h2>Core <em>Expertise</em></h2>
+    </div>
+    <div class="services-grid">
+        <div class="service-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Executive Search</h3>
+            <p>A rigorous, research-led methodology to identify, assess, and attract top-tier C-suite and Board-level leadership. We don't post and pray — we hunt, qualify, and deliver.</p>
+            <a href="/services" class="s-link">Learn More</a>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-building"></i>
+            <h3>Board Advisory</h3>
+            <p>Helping boards evolve with purpose. We advise on board composition, governance best practice, and succession planning to ensure your leadership structure meets tomorrow's demands.</p>
+            <a href="/services" class="s-link">Learn More</a>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-chart-simple"></i>
+            <h3>Local Market Intelligence</h3>
+            <p>Expert guidance on the Zambian and regional labour landscape. Competitive benchmarking, salary data, and talent availability — the intelligence you need to make informed decisions.</p>
+            <a href="/services" class="s-link">Learn More</a>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-helmet-safety"></i>
+            <h3>Project Recruitment</h3>
+            <p>Scalable, structured recruitment solutions for large-scale mining, infrastructure, energy, and commercial projects across Zambia and the SADC region.</p>
+            <a href="/services" class="s-link">Learn More</a>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-map"></i>
+            <h3>Leadership Mapping</h3>
+            <p>Comprehensive talent landscape analyses and competitor benchmarking. Know who the best leaders are before you need them — and know them before your competitors do.</p>
+            <a href="/services" class="s-link">Learn More</a>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-handshake"></i>
+            <h3>Talent Retention Strategy</h3>
+            <p>We work with clients beyond the placement — supporting onboarding frameworks, cultural integration, and long-term retention strategies that protect your investment.</p>
+            <a href="/services" class="s-link">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<section class="process-section">
+    <div class="process-header">
+        <span>How We Work</span>
+        <h2>A <em>proven</em> methodology</h2>
+    </div>
+    <div class="process-steps">
+        <div class="process-step"><div class="step-dot">1</div><h4>Brief</h4><p>Deep-dive briefing to understand the role, culture, and strategic context</p></div>
+        <div class="process-step"><div class="step-dot">2</div><h4>Research</h4><p>Proprietary market mapping and competitor talent identification</p></div>
+        <div class="process-step"><div class="step-dot">3</div><h4>Assess</h4><p>Rigorous competency-based assessment and executive-level interviewing</p></div>
+        <div class="process-step"><div class="step-dot">4</div><h4>Present</h4><p>A curated shortlist of exceptional, fully referenced candidates</p></div>
+        <div class="process-step"><div class="step-dot">5</div><h4>Place</h4><p>Offer management, onboarding support, and post-placement care</p></div>
+    </div>
+</section>
+
+<section class="sectors-section">
+    <div class="sectors-header">
+        <span>Industries We Serve</span>
+        <h2>Specialist expertise<br>across <em>Zambia's</em> economy</h2>
+    </div>
+    <div class="sectors-list">
+        <div class="sector-item"><span class="sector-name">Mining & Resources</span><span class="sector-arrow">→</span></div>
+        <div class="sector-item"><span class="sector-name">Financial Services</span><span class="sector-arrow">→</span></div>
+        <div class="sector-item"><span class="sector-name">Infrastructure & Construction</span><span class="sector-arrow">→</span></div>
+        <div class="sector-item"><span class="sector-name">Agriculture & Agribusiness</span><span class="sector-arrow">→</span></div>
+        <div class="sector-item"><span class="sector-name">Energy & Utilities</span><span class="sector-arrow">→</span></div>
+        <div class="sector-item"><span class="sector-name">FMCG & Retail</span><span class="sector-arrow">→</span></div>
+        <div class="sector-item"><span class="sector-name">Public Sector & NGOs</span><span class="sector-arrow">→</span></div>
+        <div class="sector-item"><span class="sector-name">Technology & Telecoms</span><span class="sector-arrow">→</span></div>
+    </div>
+</section>
+
+<section class="testimonial-section">
+    <div class="testimonial-inner">
+        <blockquote>"CES didn't just find us a CEO — they found us the <em>right</em> CEO. Their understanding of the Zambian market, combined with their global network, is unmatched."</blockquote>
+        <div class="testimonial-author">
+            <div class="author-line"></div>
+            <div class="author-info"><strong>Group Chairman</strong><span>Leading Zambian Conglomerate</span></div>
+            <div class="author-line"></div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-left">
+        <h2>Ready to find<br>your next <em>leader?</em></h2>
+        <p>Whether you're building a new executive team, replacing a critical position, or planning board succession — our consultants are ready to engage.</p>
+        <div class="cta-btns">
+            <a href="/contact" class="btn-primary"><span>Start a Search</span></a>
+            <a href="/register/talent" class="btn-ghost" style="color: var(--obsidian); border-color: rgba(0,0,0,0.2);"><span>Join Talent Pool</span></a>
+        </div>
+    </div>
+    <div class="cta-right">
+        <div class="cta-contact-item"><i class="fas fa-location-dot cta-contact-icon"></i><div class="cta-contact-text"><strong>Location</strong><span>Lusaka, Zambia — Serving SADC</span></div></div>
+        <div class="cta-contact-item"><i class="fas fa-phone cta-contact-icon"></i><div class="cta-contact-text"><strong>Phone</strong><span>+260 XXX XXX XXX</span></div></div>
+        <div class="cta-contact-item"><i class="fas fa-envelope cta-contact-icon"></i><div class="cta-contact-text"><strong>Email</strong><span>info@constructes.com</span></div></div>
+    </div>
+</section>
+
+<div class="footer-band">
+    <div class="footer-brand">Construct Executive Search</div>
+    <div class="footer-note">© 2025 CES Zambia · All Rights Reserved · Lusaka, Zambia</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const statNumbers = document.querySelectorAll('.hero-stat-num');
+    let animated = false;
+
+    function animateNumbers() {
+        if (animated) return;
+        const windowHeight = window.innerHeight;
+        const heroSection = document.querySelector('.hero');
+        const rect = heroSection.getBoundingClientRect();
+        if (rect.top < windowHeight - 100 && rect.bottom > 0) {
+            animated = true;
+            statNumbers.forEach(el => {
+                const target = parseInt(el.getAttribute('data-target'), 10);
+                if (isNaN(target)) return;
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        el.innerText = target;
+                        clearInterval(timer);
+                    } else {
+                        el.innerText = Math.floor(current);
+                    }
+                }, 20);
+            });
+        }
+    }
+
+    window.addEventListener('scroll', animateNumbers);
+    animateNumbers();
+});
+</script>
+{% endblock %}

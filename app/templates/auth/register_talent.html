@@ -1,0 +1,172 @@
+<!-- =========================
+FILE: app/templates/auth/register_talent.html
+========================= -->
+
+{% extends "public/base.html" %}
+
+{% block title %}Executive Talent Registration | CES{% endblock %}
+
+{% block extra_styles %}
+<style>
+    .reg-container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: white;
+        padding: 50px;
+        border-radius: 4px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        border-top: 5px solid var(--premium-gold);
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .form-header h2 {
+        color: var(--deep-emerald);
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        color: var(--deep-emerald);
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        font-family: inherit;
+        transition: var(--transition);
+    }
+
+    .form-control:focus {
+        border-color: var(--premium-gold);
+        outline: none;
+        box-shadow: 0 0 0 3px var(--soft-gold);
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .file-upload {
+        background: var(--light-bg);
+        padding: 20px;
+        border: 2px dashed #ccc;
+        text-align: center;
+        transition: var(--transition);
+    }
+
+    .file-upload:hover {
+        border-color: var(--premium-gold);
+    }
+
+    .btn-submit {
+        background: var(--deep-emerald);
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: 100%;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .section-title {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin: 40px 0 20px;
+        color: var(--premium-gold);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="reg-container">
+    <div class="form-header">
+        <h2>Executive Talent Application</h2>
+        <p>Join our elite network of industry-shaping professionals.</p>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="section-title">Account Security</div>
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" class="form-control" placeholder="e.g., John Banda" required>
+        </div>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Corporate Email</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="section-title">Professional Experience</div>
+        <div class="form-group">
+            <label>Current Profession / Job Title</label>
+            <input type="text" name="profession" class="form-control" placeholder="e.g., Senior Civil Engineer" required>
+        </div>
+
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Total Years Experience</label>
+                <input type="number" name="years_experience" class="form-control" min="0">
+            </div>
+            <div class="form-group">
+                <label>Leadership Experience (Years)</label>
+                <input type="number" name="leadership_experience" class="form-control" min="0">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Senior Management Experience (Years)</label>
+            <input type="number" name="senior_mgmt_experience" class="form-control" min="0">
+        </div>
+
+        <div class="form-group">
+            <label>Notable Projects</label>
+            <textarea name="biggest_projects" class="form-control" rows="4" placeholder="Briefly describe your most significant career achievements..."></textarea>
+        </div>
+
+        <div class="section-title">Verification & Documentation</div>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Upload CV (PDF Preferred)</label>
+                <div class="file-upload">
+                    <input type="file" name="cv_file" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Upload NRC (ID Verification)</label>
+                <div class="file-upload">
+                    <input type="file" name="nrc_file" required>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Application to CES</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,264 @@
+<!-- =========================
+FILE: app/templates/public/base.html
+========================= -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Construct Executive Search{% endblock %}</title>
+    <meta name="description" content="{% block description %}Premium Executive Search and Recruitment in Zambia.{% endblock %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --deep-emerald: #004d3d;
+            --premium-gold: #c5a059;
+            --soft-gold: #f4e9d5;
+            --pure-white: #ffffff;
+            --light-bg: #f8f9fa;
+            --text-main: #2d3748;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--light-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+        nav {
+            background: rgba(0, 77, 61, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .logo {
+            color: var(--pure-white);
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--premium-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--pure-white);
+            text-decoration: none;
+            margin-left: 28px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--premium-gold);
+        }
+
+        /* CTA BUTTON */
+        .nav-cta {
+            background: var(--premium-gold);
+            color: var(--deep-emerald) !important;
+            padding: 10px 20px;
+            border-radius: 2px;
+            margin-left: 35px !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--pure-white) !important;
+            transform: translateY(-2px);
+        }
+
+        /* AUTH BUTTONS */
+        .nav-auth {
+            border: 1px solid var(--premium-gold);
+            padding: 8px 14px;
+            margin-left: 20px;
+        }
+
+        .nav-auth:hover {
+            background: var(--premium-gold);
+            color: var(--deep-emerald) !important;
+        }
+
+        /* ================= MAIN ================= */
+        main {
+            min-height: 80vh;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background: var(--deep-emerald);
+            color: var(--pure-white);
+            padding: 80px 8% 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            color: var(--premium-gold);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        .footer-col p, .footer-col a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 12px;
+            transition: var(--transition);
+        }
+
+        .footer-col a:hover {
+            color: var(--premium-gold);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nav-links {
+                display: none; /* Future: mobile menu */
+            }
+        }
+    </style>
+
+    {% block extra_styles %}{% endblock %}
+</head>
+
+<body>
+
+<!-- ================= NAV ================= -->
+<nav>
+    <a href="/" class="logo">CONSTRUCT<span>EXECUTIVE</span></a>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/services">Services</a>
+        <a href="/industries">Industries</a>
+        <a href="/blog">Insights</a>
+
+        <!-- ================= AUTH LOGIC ================= -->
+        {% if session.get("user_id") %}
+
+            {% if session.get("role") == "admin" %}
+                <a href="/admin">Dashboard</a>
+
+            {% elif session.get("role") == "talent" %}
+                <a href="/talent/dashboard">My Profile</a>
+
+            {% elif session.get("role") == "client" %}
+                <a href="/client/dashboard">My Engagements</a>
+            {% endif %}
+
+            <a href="/logout" class="nav-auth">Logout</a>
+
+        {% else %}
+
+            <a href="/login">Login</a>
+            <a href="/register/talent" class="nav-auth">Join Talent</a>
+            <a href="/register/client" class="nav-auth">For Companies</a>
+
+        {% endif %}
+
+        <a href="/contact" class="nav-cta">Work With Us</a>
+    </div>
+</nav>
+
+<!-- ================= CONTENT ================= -->
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <div class="footer-grid">
+
+        <div class="footer-col">
+            <h4 style="color:white; font-weight:800;">Construct Executive</h4>
+            <p>Zambia's premier leadership consultancy, dedicated to identifying and securing the architects of future industry success.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Firm</h4>
+            <a href="/about">Our Story</a>
+            <a href="/services">Expertise</a>
+            <a href="/industries">Sectors</a>
+            <a href="/blog">Insights</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Support</h4>
+            <a href="/contact">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Connect</h4>
+            <p>Lusaka, Zambia</p>
+            <p>Email: info@constructexec.co.zm</p>
+            <p>Tel: +260 XXX XXX XXX</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 CONSTRUCT EXECUTIVE SEARCH ZAMBIA. ALL RIGHTS RESERVED.
+    </div>
+</footer>
+
+{% block extra_scripts %}{% endblock %}
+
+</body>
+</html>
