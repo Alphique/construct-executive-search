@@ -17,8 +17,6 @@
   <style>
     :root {
       --emerald-abyss: #00140e;
-      --emerald-deep: #00251a;
-      --emerald-regal: #00382a;
       --gold-prime: #c5a059;
       --gold-soft: #e2c999;
       --ivory-pure: #fcfaf7;
@@ -38,45 +36,10 @@
       overflow-x: hidden;
     }
 
-    /* =========================
-       HEADER
-    ========================= */
-    .site-header {
-      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-      height: 68px; padding: 0 5%;
-      display: flex; align-items: center; justify-content: space-between;
-      background: linear-gradient(to bottom, rgba(0,20,14,0.9), rgba(0,20,14,0.1));
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-    .header-brand {
-      font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em;
-      color: var(--gold-soft); white-space: nowrap;
-    }
-    .header-nav { display: flex; gap: 2.2rem; }
-    .header-nav a {
-      color: rgba(252,250,247,0.8); text-decoration: none;
-      font-size: 0.64rem; font-weight: 600; letter-spacing: 0.18em;
-      text-transform: uppercase; transition: color .3s ease;
-    }
-    .header-nav a:hover { color: var(--gold-prime); }
-    .header-cta {
-      height: 36px; padding: 0 20px; display: flex; align-items: center;
-      border: 1px solid rgba(197,160,89,0.55); color: var(--gold-soft);
-      text-decoration: none; font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      transition: all .35s cubic-bezier(0.19,1,0.22,1);
-    }
-    .header-cta:hover { background: var(--gold-prime); color: #02110c; }
-
-    /* ============================================================
-       HERO STAGE — 4s LOOP
-    ============================================================ */
     .hero-stage {
       position: relative; min-height: 100vh; overflow: hidden; background: #02110c;
     }
 
-    /* MASTER VIDEO */
     .hero-master-video { position: absolute; inset: 0; z-index: 1; }
     .hero-master-video video {
       width: 100%; height: 100%; object-fit: cover;
@@ -91,24 +54,14 @@
       100%      { transform: scale(1.24) translateX(0px); }
     }
 
-    /* 
-      GREEN MENU PANEL
-      z-index: 8 ABOVE text panel
-      Links positioned HIGH, close to header
-    */
+    /* GREEN MENU — solid, no gradient, tight fit */
     .green-menu-panel {
-      position: absolute; top: 0; left: 0; width: 26%; height: 100%;
+      position: absolute; top: 0; left: 0;
+      width: 15%;
+      padding: 3.6rem 0.9rem 0.5rem;
       z-index: 8;
-      background: linear-gradient(
-        90deg,
-        rgba(0,26,20,0.96) 0%,
-        rgba(0,30,22,0.88) 55%,
-        rgba(0,20,14,0.35) 80%,
-        rgba(0,20,14,0.02) 100%
-      );
-      backdrop-filter: blur(8px);
-      display: flex; flex-direction: column; justify-content: flex-start;
-      padding: 5rem 2rem 2rem;
+      background: rgba(0,26,20,0.96);
+      backdrop-filter: blur(6px);
       opacity: 0; pointer-events: none;
       animation: menuPanelReveal 4s cubic-bezier(0.76,0,0.24,1) infinite;
     }
@@ -120,62 +73,56 @@
     }
 
     .menu-subtitle {
-      font-size: 0.56rem; font-weight: 700; letter-spacing: 0.28em;
+      font-size: 0.46rem; font-weight: 700; letter-spacing: 0.34em;
       text-transform: uppercase; color: var(--gold-prime);
-      margin-bottom: 1rem;
+      margin-bottom: 0.45rem;
     }
 
-    /* MENU BUTTONS — clickable, compact */
     .menu-buttons {
-      display: flex; flex-direction: column; gap: 0.4rem;
+      display: flex; flex-direction: column; gap: 0.2rem;
       position: relative; z-index: 9;
+      width: 92%;
     }
     .menu-btn {
       display: block; width: 100%; text-align: left;
-      background: rgba(255,255,255,0.035);
-      border: 1px solid rgba(255,255,255,0.07);
-      color: rgba(252,250,247,0.85);
-      padding: 0.6rem 0.9rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.035);
+      color: rgba(252,250,247,0.82);
+      padding: 0.32rem 0.45rem;
       font-family: 'Inter', sans-serif;
-      font-size: 0.74rem; font-weight: 500;
+      font-size: 0.58rem; font-weight: 500;
       text-decoration: none; cursor: pointer;
       transition: all 0.3s ease;
-      border-radius: 2px;
+      border-radius: 1px;
       pointer-events: auto;
+      white-space: nowrap;
     }
     .menu-btn:hover {
       background: rgba(197,160,89,0.12);
       border-color: rgba(197,160,89,0.28);
       color: var(--gold-soft);
-      padding-left: 1.3rem;
+      padding-left: 0.8rem;
     }
 
-    /* ATMOSPHERIC OVERLAY */
     .hero-stage::before {
       content: ""; position: absolute; inset: 0; z-index: 2;
       background:
-        radial-gradient(circle at top right, rgba(197,160,89,0.05), transparent 30%),
-        linear-gradient(90deg, rgba(0,20,14,0.7) 0%, rgba(0,20,14,0.25) 30%, rgba(0,20,14,0.03) 65%, transparent 100%);
+        radial-gradient(circle at top right, rgba(197,160,89,0.04), transparent 30%),
+        linear-gradient(90deg, rgba(0,20,14,0.45) 0%, rgba(0,20,14,0.12) 20%, rgba(0,20,14,0.02) 50%, transparent 100%);
     }
 
-    /* AMBIENT BLOOM */
     .hero-stage::after {
-      content: ""; position: absolute; width: 400px; height: 400px;
-      top: -100px; right: -80px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(197,160,89,0.05), transparent 70%);
-      filter: blur(50px); z-index: 2; pointer-events: none;
+      content: ""; position: absolute; width: 300px; height: 300px;
+      top: -50px; right: -30px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(197,160,89,0.03), transparent 70%);
+      filter: blur(35px); z-index: 2; pointer-events: none;
       animation: ambientFloat 4s ease-in-out infinite;
     }
     @keyframes ambientFloat {
       0%, 100% { transform: translateY(0px) translateX(0px); }
-      50%      { transform: translateY(12px) translateX(-8px); }
+      50%      { transform: translateY(4px) translateX(-2px); }
     }
 
-    /* 
-      TEXT PANEL — z-index: 6 BELOW menu panel (z-index: 8)
-      pointer-events: none so clicks pass through to menu
-      Text stays ABOVE the green visually because it's positioned lower
-    */
     .hero-text-panel {
       position: absolute; inset: 0; z-index: 6;
       display: flex; align-items: center; justify-content: center; padding: 0;
@@ -183,9 +130,7 @@
       pointer-events: none;
     }
 
-    .hero-text-inner {
-      pointer-events: auto;
-    }
+    .hero-text-inner { pointer-events: auto; }
 
     @keyframes heroPanelShift {
       0%, 25%   { transform: translateX(0%) scale(1); }
@@ -193,10 +138,9 @@
       100%      { transform: translateX(0%) scale(1); }
     }
 
-    /* GLASS CARD */
     .hero-text-inner {
       width: min(640px, 85vw);
-      padding: 2.8rem 2.5rem; text-align: center;
+      padding: 2.6rem 2.4rem; text-align: center;
       position: relative; overflow: hidden; border-radius: 22px;
       transform-origin: center left;
       animation: panelMaterialize 4s cubic-bezier(0.76,0,0.24,1) infinite;
@@ -208,7 +152,6 @@
       100%      { backdrop-filter: blur(0px); background: transparent; border: 1px solid transparent; box-shadow: none; }
     }
 
-    /* GOLD EDGE */
     .hero-text-inner::before {
       content: ""; position: absolute; top: 0; left: 0;
       width: 1px; height: 100%;
@@ -229,60 +172,54 @@
       100%      { opacity: 0; }
     }
 
-    /* LOGO */
     .ces-hero-logo {
-      width: 58px; margin: 0 auto 1rem; display: block;
-      filter: drop-shadow(0 5px 12px rgba(197,160,89,0.2));
+      width: 56px; margin: 0 auto 0.9rem; display: block;
+      filter: drop-shadow(0 4px 10px rgba(197,160,89,0.2));
     }
 
-    /* EYEBROW */
     .hero-eyebrow {
-      font-size: 0.54rem; font-weight: 700; letter-spacing: 0.3em;
+      font-size: 0.52rem; font-weight: 700; letter-spacing: 0.28em;
       text-transform: uppercase; color: var(--gold-prime);
-      margin-bottom: 0.6rem; text-align: center;
+      margin-bottom: 0.5rem; text-align: center;
     }
 
-    /* TITLE */
     .hero-title {
-      font-size: clamp(2.3rem, 5vw, 4.4rem); font-weight: 700;
+      font-size: clamp(2.2rem, 4.8vw, 4.2rem); font-weight: 700;
       line-height: 0.92; color: var(--white-soft);
-      margin-bottom: 0.8rem; text-align: center;
-      text-shadow: 0 3px 24px rgba(0,0,0,0.5); letter-spacing: -0.02em;
+      margin-bottom: 0.7rem; text-align: center;
+      text-shadow: 0 3px 22px rgba(0,0,0,0.5); letter-spacing: -0.02em;
     }
     .hero-title span {
       display: block; font-style: italic; font-weight: 700;
       background: linear-gradient(135deg, #c5a059 0%, #f4e9d5 45%, #c5a059 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; margin-top: 0.06rem;
+      background-clip: text; margin-top: 0.04rem;
     }
 
-    /* DESCRIPTION */
     .hero-description {
-      font-size: 0.78rem; font-weight: 400; line-height: 1.55;
-      color: rgba(252,250,247,0.65);
-      margin: 0 auto 1.6rem; max-width: 400px; text-align: center;
+      font-size: 0.76rem; font-weight: 400; line-height: 1.5;
+      color: rgba(252,250,247,0.62);
+      margin: 0 auto 1.4rem; max-width: 380px; text-align: center;
     }
 
-    /* BUTTON */
     .btn-premium {
       background: transparent; color: var(--gold-prime);
-      border: 1px solid var(--gold-prime); padding: 11px 24px;
-      font-size: 0.62rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.24em; background: rgba(0,20,14,0.25);
+      border: 1px solid var(--gold-prime); padding: 10px 22px;
+      font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.22em; background: rgba(0,20,14,0.25);
       backdrop-filter: blur(8px); cursor: pointer; display: inline-block;
       text-decoration: none; border-radius: 2px;
       transition: all 0.4s cubic-bezier(0.19,1,0.22,1);
     }
     .btn-premium:hover {
       background: var(--gold-prime); color: var(--emerald-abyss);
-      border-color: var(--gold-prime); box-shadow: 0 10px 28px rgba(197,160,89,0.26);
-      transform: translateY(-2px); letter-spacing: 0.28em;
+      border-color: var(--gold-prime); box-shadow: 0 10px 26px rgba(197,160,89,0.24);
+      transform: translateY(-2px); letter-spacing: 0.26em;
     }
     .hero-actions {
-      display: flex; gap: 0.7rem; flex-wrap: wrap; justify-content: center;
+      display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center;
     }
 
-    /* VIDEO REVEAL */
     .hero-video-reveal {
       position: absolute; inset: 0; z-index: 4; pointer-events: none;
     }
@@ -295,72 +232,34 @@
     }
     @keyframes revealMask {
       0%, 28%   { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
-      40%, 65%  { clip-path: polygon(18% 0, 100% 0, 100% 100%, 28% 100%); opacity: 1; }
+      40%, 65%  { clip-path: polygon(8% 0, 100% 0, 100% 100%, 18% 100%); opacity: 1; }
       100%      { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
-    .site-footer {
-      background: var(--emerald-abyss);
-      border-top: 1px solid rgba(197,160,89,0.07);
-      padding: 1.8rem 5%; display: flex;
-      justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1.2rem;
-    }
-    .footer-info p {
-      color: rgba(252,250,247,0.35); font-size: 0.62rem;
-      font-weight: 500; letter-spacing: 0.05em;
-    }
-    .footer-links { display: flex; gap: 1.6rem; }
-    .footer-links a {
-      color: rgba(252,250,247,0.35); text-decoration: none;
-      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase; transition: color 0.3s;
-    }
-    .footer-links a:hover { color: var(--gold-prime); }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
     @media (max-width: 1024px) {
-      .green-menu-panel { width: 30%; padding: 4.5rem 1.8rem 2rem; }
-      .menu-btn { font-size: 0.68rem; padding: 0.5rem 0.8rem; }
-      .hero-text-inner { width: min(480px, 85vw); padding: 2.2rem 1.8rem; }
-      @keyframes heroPanelShift {
-        0%, 25%   { transform: translateX(0%) scale(1); }
-        40%, 65%  { transform: translateX(-12%) scale(0.74); }
-        100%      { transform: translateX(0%) scale(1); }
-      }
-      @keyframes heroVideoMotion {
-        0%, 25%   { transform: scale(1.2) translateX(0px); }
-        40%, 65%  { transform: scale(1) translateX(120px); }
-        100%      { transform: scale(1.2) translateX(0px); }
-      }
+      .green-menu-panel { width: 20%; padding: 3.2rem 0.7rem 0.4rem; }
+      .menu-btn { font-size: 0.54rem; padding: 0.28rem 0.35rem; }
+      .hero-text-inner { width: min(480px, 82vw); padding: 2rem 1.6rem; }
     }
 
     @media (max-width: 768px) {
-      .header-nav { display: none; }
-      .header-brand { font-size: 0.95rem; }
       .green-menu-panel {
-        position: relative; width: 100%; height: auto; min-height: auto;
+        position: relative; width: 100%;
         opacity: 1; pointer-events: auto; animation: none;
-        padding: 4rem 1.6rem 1.5rem;
-        background: linear-gradient(180deg, rgba(0,26,20,0.96) 0%, rgba(0,20,14,0.2) 100%);
+        padding: 2.6rem 0.9rem 0.5rem;
+        background: rgba(0,26,20,0.96);
       }
       .hero-text-panel { animation: none; transform: translateX(0) scale(1); }
       .hero-text-inner {
-        width: 100%; padding: 1.8rem 1.2rem; border-radius: 14px;
+        width: 100%; padding: 1.6rem 1.2rem; border-radius: 14px;
         animation: none; backdrop-filter: blur(14px);
         background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
         border: 1px solid rgba(197,160,89,0.14); box-shadow: 0 24px 60px rgba(0,0,0,0.4);
       }
       .hero-text-inner::before, .hero-text-inner::after { opacity: 1; }
-      .hero-title { font-size: 1.6rem; }
+      .hero-title { font-size: 1.5rem; }
       .hero-video-reveal::before { animation: none; clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
       .hero-master-video video { animation: none; transform: scale(1); }
-      .site-footer { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
@@ -373,7 +272,7 @@
       </video>
     </div>
 
-    <!-- GREEN MENU — links up high near header, z-index 8 above text -->
+    <!-- GREEN MENU — solid, no gradient, tight -->
     <div class="green-menu-panel">
       <span class="menu-subtitle">Navigate</span>
       <div class="menu-buttons">
@@ -388,7 +287,6 @@
 
     <div class="hero-video-reveal"></div>
 
-    <!-- TEXT PANEL — centered, z-index 6 below menu, text stays on top visually -->
     <div class="hero-text-panel">
       <div class="hero-text-inner">
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="CES" class="ces-hero-logo">
@@ -408,7 +306,6 @@
       </div>
     </div>
   </section>
-
 
 </body>
 </html>
