@@ -9,22 +9,23 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --emerald-deep: #002118;
-            --emerald-mid: #00382a;
-            --emerald-light: #004d3a;
-            --gold-accent: #c5a059;
-            --gold-bright: #e8d5a3;
+            --green-black: #00140e;
+            --green-deep: #001f16;
+            --green-mid: #002b1f;
+            --green-surface: #003526;
+            --gold: #c5a059;
+            --gold-light: #e2c999;
             --gold-soft: #d4b76e;
-            --ivory: #fcfaf7;
+            --white: #fcfaf7;
             --white-soft: #f5f2eb;
-            --text-dark: #1a1a1a;
-            --text-muted: #5a5a5a;
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+            --gray: #9a9a96;
+            --gray-muted: rgba(252,250,247,0.45);
+            --border: rgba(197,160,89,0.1);
+            --ease: cubic-bezier(0.76, 0, 0.24, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,16 +33,18 @@
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--ivory);
-            color: var(--text-dark);
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background-color: var(--green-black);
+            color: var(--white);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            line-height: 1.6;
+            line-height: 1.5;
+            font-weight: 400;
+            font-size: 1.05rem;
         }
 
         /* ============================================================
-           NAVIGATION
+           NAV — dark green, minimal
         ============================================================ */
         nav {
             position: fixed;
@@ -50,158 +53,134 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 28px 6%;
+            padding: 24px 5%;
             z-index: 1000;
-            transition: var(--transition);
+            transition: all 0.5s var(--ease);
         }
 
         nav.scrolled {
-            padding: 16px 6%;
-            background: rgba(0, 33, 24, 0.96);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-            border-bottom: 1px solid rgba(197,160,89,0.08);
+            padding: 14px 5%;
+            background: rgba(0,20,14,0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
         }
 
         .brand-container {
             display: flex;
             align-items: center;
             text-decoration: none;
-            gap: 14px;
-            z-index: 1001;
+            gap: 12px;
         }
 
         .brand-logo {
-            height: 46px;
+            height: 40px;
             width: auto;
-            transition: var(--transition);
+            transition: all 0.5s var(--ease);
         }
 
         nav.scrolled .brand-logo {
-            height: 38px;
+            height: 32px;
         }
 
-        .brand-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--gold-accent);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+        .brand-text {
+            display: flex;
+            flex-direction: column;
             line-height: 1;
         }
 
-        .brand-name span {
-            color: #fff;
+        .brand-name {
+            font-size: 1.2rem;
             font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        /* NAV LINKS */
+        .brand-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5rem;
+            color: var(--gray-muted);
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+        }
+
+        /* DESKTOP NAV */
         .nav-menu {
             display: flex;
-            gap: 36px;
+            gap: 40px;
             align-items: center;
         }
 
         .nav-menu a {
             text-decoration: none;
-            color: rgba(255,255,255,0.85);
-            font-size: 0.7rem;
-            font-weight: 600;
+            color: rgba(252,250,247,0.7);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 1.8px;
-            transition: var(--transition);
+            letter-spacing: 2px;
+            transition: color 0.35s;
             position: relative;
-            padding: 4px 0;
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--gold-accent);
-            transition: width 0.35s var(--ease-expo);
         }
 
         .nav-menu a:hover {
-            color: #fff;
+            color: var(--gold);
         }
 
-        .nav-menu a:hover::after {
-            width: 100%;
+        .nav-cta {
+            border: 1px solid var(--gold);
+            color: var(--gold) !important;
+            padding: 10px 22px;
+            transition: all 0.4s var(--ease) !important;
         }
 
-        /* CTA BUTTON */
-        .cta-gold {
-            background: var(--gold-accent);
-            color: var(--emerald-deep) !important;
-            padding: 13px 30px !important;
-            border-radius: 0;
-            font-weight: 700 !important;
-            letter-spacing: 1.5px !important;
-            box-shadow: 0 4px 18px rgba(197, 160, 89, 0.25);
-            transition: var(--transition);
-        }
-
-        .cta-gold:hover {
-            background: #fff !important;
-            color: var(--emerald-deep) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(197, 160, 89, 0.35);
-        }
-
-        .cta-gold::after {
-            display: none !important;
+        .nav-cta:hover {
+            background: var(--gold) !important;
+            color: var(--green-black) !important;
         }
 
         /* HAMBURGER */
         .hamburger {
             display: none;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
             cursor: pointer;
             z-index: 1001;
-            padding: 8px;
+            padding: 6px;
         }
 
         .hamburger span {
             display: block;
-            width: 26px;
-            height: 2px;
-            background: #fff;
-            transition: var(--transition);
-            border-radius: 1px;
+            width: 22px;
+            height: 1.5px;
+            background: var(--white);
+            transition: all 0.4s var(--ease);
         }
 
         .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(45deg) translate(4px, 4px);
         }
-
         .hamburger.active span:nth-child(2) {
             opacity: 0;
         }
-
         .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+            transform: rotate(-45deg) translate(4px, -4px);
         }
 
-        /* MOBILE MENU */
+        /* MOBILE MENU — green overlay */
         .mobile-menu {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 24, 16, 0.98);
+            background: rgba(0,20,14,0.97);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 999;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 32px;
+            gap: 28px;
         }
 
         .mobile-menu.active {
@@ -209,38 +188,34 @@
         }
 
         .mobile-menu a {
-            color: #fff;
+            color: var(--white);
             text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 3px;
             transition: color 0.3s;
         }
 
         .mobile-menu a:hover {
-            color: var(--gold-accent);
-        }
-
-        .mobile-menu .cta-gold {
-            margin-top: 16px;
-            font-size: 0.85rem !important;
+            color: var(--gold);
         }
 
         /* ============================================================
-           CONTENT AREA
+           MAIN CONTENT
         ============================================================ */
         main { 
             min-height: 100vh; 
         }
 
         /* ============================================================
-           FOOTER
+           FOOTER — green architectural
         ============================================================ */
         footer {
-            background: var(--emerald-deep);
-            color: #fff;
-            padding: 90px 6% 35px;
+            background: var(--green-deep);
+            border-top: 1px solid var(--border);
+            padding: 80px 5% 30px;
             position: relative;
         }
 
@@ -248,86 +223,84 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 6%;
-            right: 6%;
+            left: 5%;
+            right: 5%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(197,160,89,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(197,160,89,0.25), transparent);
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.2fr;
-            gap: 50px;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 60px;
             padding-bottom: 50px;
+            border-bottom: 1px solid var(--border);
         }
 
         .footer-col h4 {
-            color: var(--gold-accent);
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            letter-spacing: 0.5px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 22px;
         }
 
         .footer-col p {
-            color: rgba(255,255,255,0.55);
-            font-size: 0.88rem;
-            line-height: 1.8;
+            color: var(--gray-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
 
         .footer-col a {
             display: block;
-            color: rgba(255,255,255,0.55);
+            color: var(--gray-muted);
             text-decoration: none;
-            margin-bottom: 11px;
-            font-size: 0.85rem;
-            font-weight: 400;
-            transition: var(--transition);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
         }
 
-        .footer-col a:hover { 
-            color: var(--gold-soft); 
-            padding-left: 6px;
+        .footer-col a:hover {
+            color: var(--gold-light);
+            padding-left: 4px;
         }
 
-        .footer-badge {
+        .footer-tag {
             display: inline-block;
-            background: rgba(197,160,89,0.1);
-            border: 1px solid rgba(197,160,89,0.2);
-            padding: 6px 14px;
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.55rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--gold-soft);
-            margin-top: 12px;
+            color: var(--gold-light);
+            border: 1px solid rgba(197,160,89,0.2);
+            padding: 8px 16px;
+            margin-top: 16px;
         }
 
         .legal-row {
-            margin-top: 35px;
-            padding-top: 25px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 16px;
-            font-size: 0.65rem;
-            color: rgba(255,255,255,0.3);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.55rem;
+            color: rgba(252,250,247,0.2);
             text-transform: uppercase;
-            letter-spacing: 1.2px;
-            font-weight: 500;
+            letter-spacing: 1.5px;
         }
 
         .legal-row a {
-            color: rgba(255,255,255,0.3);
+            color: rgba(252,250,247,0.2);
             text-decoration: none;
             transition: color 0.3s;
         }
 
         .legal-row a:hover {
-            color: var(--gold-soft);
+            color: var(--gold);
         }
 
         /* ============================================================
@@ -338,87 +311,37 @@
                 grid-template-columns: 1fr 1fr; 
                 gap: 40px; 
             }
-            
-            .nav-menu { 
-                gap: 24px; 
-            }
-            
-            .nav-menu a {
-                font-size: 0.65rem;
-                letter-spacing: 1.2px;
-            }
+            .nav-menu { gap: 28px; }
+            .nav-menu a { font-size: 0.55rem; letter-spacing: 1.5px; }
         }
 
         @media (max-width: 768px) {
-            nav {
-                padding: 20px 5%;
-            }
-            
-            nav.scrolled {
-                padding: 14px 5%;
-            }
+            nav { padding: 20px 5%; }
+            nav.scrolled { padding: 12px 5%; }
+            .brand-logo { height: 32px; }
+            .brand-name { font-size: 1rem; }
 
-            .brand-logo {
-                height: 38px;
-            }
-            
-            .brand-name {
-                font-size: 1.1rem;
-            }
-
-            /* Hide desktop nav, show hamburger */
-            .nav-menu {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
+            .nav-menu { display: none; }
+            .hamburger { display: flex; }
 
             .footer-grid { 
                 grid-template-columns: 1fr; 
                 gap: 35px; 
-            }
-
-            .footer-col {
                 text-align: center;
             }
-
-            .footer-col a:hover {
-                padding-left: 0;
-            }
-
-            .legal-row {
-                flex-direction: column;
-                text-align: center;
-            }
+            .footer-col a:hover { padding-left: 0; }
+            .legal-row { flex-direction: column; text-align: center; }
         }
 
         @media (max-width: 480px) {
-            nav {
-                padding: 16px 4%;
-            }
+            nav { padding: 16px 4%; }
+            .brand-logo { height: 28px; }
+            .brand-name { font-size: 0.9rem; }
+            .brand-sub { font-size: 0.45rem; }
 
-            .brand-logo {
-                height: 32px;
-            }
-
-            .brand-name {
-                font-size: 1rem;
-            }
-
-            .brand-container {
-                gap: 10px;
-            }
-
-            footer {
-                padding: 60px 5% 25px;
-            }
-
-            .footer-col h4 {
-                font-size: 1rem;
-                margin-bottom: 18px;
-            }
+            footer { padding: 50px 5% 20px; }
+            .footer-col h4 { font-size: 0.55rem; }
+            .footer-col p { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -427,10 +350,12 @@
 <nav id="mainNav">
     <a href="/" class="brand-container">
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="CES Logo" class="brand-logo">
-        <span class="brand-name">Construct<span>Exec</span></span>
+        <div class="brand-text">
+            <span class="brand-name">Construct<span style="color:#fff;font-weight:400;">Exec</span></span>
+            <span class="brand-sub">Executive Search</span>
+        </div>
     </a>
 
-    <!-- Desktop Nav -->
     <div class="nav-menu">
         <a href="/">Home</a>
         <a href="/about">Firm</a>
@@ -444,10 +369,9 @@
             <a href="/login">Login</a>
         {% endif %}
         
-        <a href="/contact" class="cta-gold">Partner With Us</a>
+        <a href="/contact" class="nav-cta">Engage</a>
     </div>
 
-    <!-- Hamburger -->
     <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
         <span></span>
         <span></span>
@@ -455,7 +379,6 @@
     </div>
 </nav>
 
-<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
     <a href="/" onclick="toggleMenu()">Home</a>
     <a href="/about" onclick="toggleMenu()">Firm</a>
@@ -469,7 +392,7 @@
         <a href="/login" onclick="toggleMenu()">Login</a>
     {% endif %}
     
-    <a href="/contact" class="cta-gold" onclick="toggleMenu()">Partner With Us</a>
+    <a href="/contact" class="nav-cta" style="display:inline-block;margin-top:8px;" onclick="toggleMenu()">Engage</a>
 </div>
 
 <main>
@@ -479,28 +402,28 @@
 <footer>
     <div class="footer-grid">
         <div class="footer-col">
-            <h4>CONSTRUCT EXECUTIVE</h4>
+            <h4>Construct Executive Search</h4>
             <p>
-                Architects of leadership. We secure the executive talent that builds Zambia's industrial future across mining, energy, fintech, and infrastructure.
+                A premier retained executive search partnership serving Zambia and the SADC region. We architect leadership across mining, energy, fintech, and infrastructure.
             </p>
-            <span class="footer-badge">SADC Region</span>
+            <span class="footer-tag">Lusaka · SADC</span>
         </div>
         <div class="footer-col">
-            <h4>Solutions</h4>
+            <h4>Capabilities</h4>
             <a href="#">Retained Search</a>
             <a href="#">Board Advisory</a>
-            <a href="#">Interim Leadership</a>
-            <a href="#">Talent Intelligence</a>
+            <a href="#">Interim Placements</a>
+            <a href="#">Succession Planning</a>
         </div>
         <div class="footer-col">
-            <h4>Sectors</h4>
-            <a href="#">Mining &amp; Energy</a>
-            <a href="#">FinTech &amp; Banking</a>
+            <h4>Industries</h4>
+            <a href="#">Mining &amp; Resources</a>
+            <a href="#">Financial Services</a>
             <a href="#">Infrastructure</a>
-            <a href="#">Agriculture</a>
+            <a href="#">Technology</a>
         </div>
         <div class="footer-col">
-            <h4>Connect</h4>
+            <h4>Contact</h4>
             <p>Lusaka, Zambia</p>
             <a href="mailto:info@constructexec.co.zm">info@constructexec.co.zm</a>
             <a href="#">LinkedIn</a>
@@ -508,56 +431,43 @@
     </div>
 
     <div class="legal-row">
-        <span>&copy; 2026 Construct Executive Search Zambia. All rights reserved.</span>
+        <span>© 2026 Construct Executive Search</span>
         <span>
-            <a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a> &nbsp;·&nbsp; Discrete · Strategic · Local
+            <a href="#">Privacy</a> &nbsp;/&nbsp; <a href="#">Terms</a> &nbsp;/&nbsp; Discrete · Strategic · Local
         </span>
     </div>
 </footer>
 
 <script>
-    // Smooth Navbar Transition
     const nav = document.getElementById('mainNav');
     
     function updateNav() {
-        if (window.pageYOffset > 50) {
-            nav.classList.add("scrolled");
-        } else {
-            nav.classList.remove("scrolled");
-        }
+        nav.classList.toggle("scrolled", window.pageYOffset > 50);
     }
     
     window.addEventListener('scroll', updateNav, { passive: true });
-    // Check on load in case page is already scrolled
     updateNav();
 
-    // Mobile Menu Toggle
     function toggleMenu() {
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
         const body = document.body;
         
+        const isOpen = mobileMenu.classList.contains('active');
+        
         hamburger.classList.toggle('active');
         mobileMenu.classList.toggle('active');
-        
-        if (mobileMenu.classList.contains('active')) {
-            body.style.overflow = 'hidden';
-        } else {
-            body.style.overflow = '';
-        }
+        body.style.overflow = isOpen ? '' : 'hidden';
     }
 
-    // Close mobile menu on window resize (if desktop nav becomes visible)
     window.addEventListener('resize', function() {
         if (window.innerWidth > 768) {
             const hamburger = document.getElementById('hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
-            const body = document.body;
-            
             if (mobileMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 mobileMenu.classList.remove('active');
-                body.style.overflow = '';
+                document.body.style.overflow = '';
             }
         }
     });
