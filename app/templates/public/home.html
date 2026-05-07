@@ -40,12 +40,20 @@
       position: relative; min-height: 100vh; overflow: hidden; background: #02110c;
     }
 
-    .hero-master-video { position: absolute; inset: 0; z-index: 1; }
+    .hero-master-video { 
+      position: absolute; inset: 0; z-index: 1; 
+      width: 100%; height: 100%;
+    }
     .hero-master-video video {
       width: 100%; height: 100%; object-fit: cover;
       filter: brightness(0.5) saturate(0.78) contrast(1.04);
       animation: heroVideoMotion 4s cubic-bezier(0.76,0,0.24,1) infinite;
       transform-origin: center center;
+      display: block;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
 
     @keyframes heroVideoMotion {
@@ -54,7 +62,6 @@
       100%      { transform: scale(1.24) translateX(0px); }
     }
 
-    /* GREEN MENU — solid, no gradient, tight fit */
     .green-menu-panel {
       position: absolute; top: 0; left: 0;
       width: 15%;
@@ -81,7 +88,6 @@
     .menu-buttons {
       display: flex; flex-direction: column; gap: 0.2rem;
       position: relative; z-index: 9;
-      width: 92%;
     }
     .menu-btn {
       display: block; width: 100%; text-align: left;
@@ -133,15 +139,15 @@
     .hero-text-inner { pointer-events: auto; }
 
     @keyframes heroPanelShift {
-      0%, 25%   { transform: translateX(0%) scale(1); }
-      40%, 65%  { transform: translateX(-20%) scale(0.68); }
-      100%      { transform: translateX(0%) scale(1); }
+      0%, 25%   { transform: translateX(0%) scale(1.05); }
+      40%, 65%  { transform: translateX(-20%) scale(0.72); }
+      100%      { transform: translateX(0%) scale(1.05); }
     }
 
     .hero-text-inner {
-      width: min(640px, 85vw);
-      padding: 2.6rem 2.4rem; text-align: center;
-      position: relative; overflow: hidden; border-radius: 22px;
+      width: min(700px, 88vw);
+      padding: 3rem 2.8rem; text-align: center;
+      position: relative; overflow: hidden; border-radius: 24px;
       transform-origin: center left;
       animation: panelMaterialize 4s cubic-bezier(0.76,0,0.24,1) infinite;
     }
@@ -173,51 +179,51 @@
     }
 
     .ces-hero-logo {
-      width: 56px; margin: 0 auto 0.9rem; display: block;
-      filter: drop-shadow(0 4px 10px rgba(197,160,89,0.2));
+      width: 65px; margin: 0 auto 1.1rem; display: block;
+      filter: drop-shadow(0 4px 12px rgba(197,160,89,0.25));
     }
 
     .hero-eyebrow {
-      font-size: 0.52rem; font-weight: 700; letter-spacing: 0.28em;
+      font-size: 0.56rem; font-weight: 700; letter-spacing: 0.3em;
       text-transform: uppercase; color: var(--gold-prime);
-      margin-bottom: 0.5rem; text-align: center;
+      margin-bottom: 0.6rem; text-align: center;
     }
 
     .hero-title {
-      font-size: clamp(2.2rem, 4.8vw, 4.2rem); font-weight: 700;
-      line-height: 0.92; color: var(--white-soft);
-      margin-bottom: 0.7rem; text-align: center;
-      text-shadow: 0 3px 22px rgba(0,0,0,0.5); letter-spacing: -0.02em;
+      font-size: clamp(2.6rem, 5.5vw, 5rem); font-weight: 700;
+      line-height: 0.9; color: var(--white-soft);
+      margin-bottom: 0.8rem; text-align: center;
+      text-shadow: 0 3px 24px rgba(0,0,0,0.5); letter-spacing: -0.02em;
     }
     .hero-title span {
       display: block; font-style: italic; font-weight: 700;
       background: linear-gradient(135deg, #c5a059 0%, #f4e9d5 45%, #c5a059 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; margin-top: 0.04rem;
+      background-clip: text; margin-top: 0.06rem;
     }
 
     .hero-description {
-      font-size: 0.76rem; font-weight: 400; line-height: 1.5;
-      color: rgba(252,250,247,0.62);
-      margin: 0 auto 1.4rem; max-width: 380px; text-align: center;
+      font-size: 0.85rem; font-weight: 400; line-height: 1.6;
+      color: rgba(252,250,247,0.65);
+      margin: 0 auto 1.6rem; max-width: 440px; text-align: center;
     }
 
     .btn-premium {
       background: transparent; color: var(--gold-prime);
-      border: 1px solid var(--gold-prime); padding: 10px 22px;
-      font-size: 0.6rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.22em; background: rgba(0,20,14,0.25);
+      border: 1px solid var(--gold-prime); padding: 12px 26px;
+      font-size: 0.64rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.24em; background: rgba(0,20,14,0.25);
       backdrop-filter: blur(8px); cursor: pointer; display: inline-block;
       text-decoration: none; border-radius: 2px;
       transition: all 0.4s cubic-bezier(0.19,1,0.22,1);
     }
     .btn-premium:hover {
       background: var(--gold-prime); color: var(--emerald-abyss);
-      border-color: var(--gold-prime); box-shadow: 0 10px 26px rgba(197,160,89,0.24);
-      transform: translateY(-2px); letter-spacing: 0.26em;
+      border-color: var(--gold-prime); box-shadow: 0 10px 28px rgba(197,160,89,0.26);
+      transform: translateY(-2px); letter-spacing: 0.28em;
     }
     .hero-actions {
-      display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center;
+      display: flex; gap: 0.7rem; flex-wrap: wrap; justify-content: center;
     }
 
     .hero-video-reveal {
@@ -239,7 +245,7 @@
     @media (max-width: 1024px) {
       .green-menu-panel { width: 20%; padding: 3.2rem 0.7rem 0.4rem; }
       .menu-btn { font-size: 0.54rem; padding: 0.28rem 0.35rem; }
-      .hero-text-inner { width: min(480px, 82vw); padding: 2rem 1.6rem; }
+      .hero-text-inner { width: min(560px, 85vw); padding: 2.4rem 2rem; }
     }
 
     @media (max-width: 768px) {
@@ -251,13 +257,13 @@
       }
       .hero-text-panel { animation: none; transform: translateX(0) scale(1); }
       .hero-text-inner {
-        width: 100%; padding: 1.6rem 1.2rem; border-radius: 14px;
+        width: 100%; padding: 2rem 1.4rem; border-radius: 16px;
         animation: none; backdrop-filter: blur(14px);
         background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
         border: 1px solid rgba(197,160,89,0.14); box-shadow: 0 24px 60px rgba(0,0,0,0.4);
       }
       .hero-text-inner::before, .hero-text-inner::after { opacity: 1; }
-      .hero-title { font-size: 1.5rem; }
+      .hero-title { font-size: 1.8rem; }
       .hero-video-reveal::before { animation: none; clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
       .hero-master-video video { animation: none; transform: scale(1); }
     }
@@ -267,12 +273,12 @@
 
   <section class="hero-stage">
     <div class="hero-master-video">
-      <video autoplay muted loop playsinline>
-        <source src="{{ url_for('static', filename='images/animation.mp4') }}" type="video/mp4">
+      <video autoplay muted loop playsinline preload="auto" disablepictureinpicture>
+        <source src="{{ url_for('static', filename='images/avideo.mp4') }}" type="video/mp4">
+        <source src="{{ url_for('static', filename='images/avideo.webm') }}" type="video/webm">
       </video>
     </div>
 
-    <!-- GREEN MENU — solid, no gradient, tight -->
     <div class="green-menu-panel">
       <span class="menu-subtitle">Navigate</span>
       <div class="menu-buttons">
@@ -307,6 +313,21 @@
     </div>
   </section>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var video = document.querySelector('.hero-master-video video');
+      if (video) {
+        var playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(function() {
+            document.addEventListener('click', function() {
+              video.play();
+            }, { once: true });
+          });
+        }
+      }
+    });
+  </script>
 </body>
 </html>
 {% endblock %}
