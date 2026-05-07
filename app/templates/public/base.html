@@ -1,264 +1,240 @@
-<!-- =========================
-FILE: app/templates/public/base.html
-========================= -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}Construct Executive Search{% endblock %}</title>
-    <meta name="description" content="{% block description %}Premium Executive Search and Recruitment in Zambia.{% endblock %}">
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
-
+    <title>{% block title %}Construct Executive Search | Zambia{% endblock %}</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --deep-emerald: #004d3d;
-            --premium-gold: #c5a059;
-            --soft-gold: #f4e9d5;
-            --pure-white: #ffffff;
-            --light-bg: #f8f9fa;
-            --text-main: #2d3748;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --emerald-deep: #002b21;
+            --emerald-light: #004233;
+            --gold-accent: #c5a059;
+            --gold-bright: #e8d5a3;
+            --ivory: #fcfaf7;
+            --text-dark: #1a202c;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--light-bg);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--ivory);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ================= NAVBAR ================= */
+        /* --- THE LOGO FIX & NAV RE-DESIGN --- */
         nav {
-            background: rgba(0, 77, 61, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 20px 8%;
+            position: fixed;
+            top: 0;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
+            padding: 30px 8%;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-        }
-
-        .logo {
-            color: var(--pure-white);
-            font-weight: 800;
-            font-size: 22px;
-            letter-spacing: 2px;
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: var(--premium-gold);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--pure-white);
-            text-decoration: none;
-            margin-left: 28px;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             transition: var(--transition);
         }
 
-        .nav-links a:hover {
-            color: var(--premium-gold);
+        /* Logic: This class gets added via JavaScript on scroll */
+        nav.scrolled {
+            padding: 15px 8%;
+            background: rgba(0, 43, 33, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        /* CTA BUTTON */
-        .nav-cta {
-            background: var(--premium-gold);
-            color: var(--deep-emerald) !important;
-            padding: 10px 20px;
-            border-radius: 2px;
-            margin-left: 35px !important;
+        .brand-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 15px;
         }
 
-        .nav-cta:hover {
-            background: var(--pure-white) !important;
+        .brand-logo {
+            height: 50px; /* Fixed height for the logo */
+            width: auto;
+            transition: var(--transition);
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold-accent);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- NAV LINKS --- */
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            opacity: 1;
+            color: var(--gold-accent);
+        }
+
+        /* --- THE CTA BUTTON (The "Money" Button) --- */
+        .cta-gold {
+            background: var(--gold-accent);
+            color: var(--emerald-deep) !important;
+            padding: 12px 28px;
+            border-radius: 0px; /* Sharp edges = sharper professional look */
+            font-weight: 700 !important;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+        }
+
+        .cta-gold:hover {
+            background: #fff !important;
             transform: translateY(-2px);
         }
 
-        /* AUTH BUTTONS */
-        .nav-auth {
-            border: 1px solid var(--premium-gold);
-            padding: 8px 14px;
-            margin-left: 20px;
-        }
+        /* --- CONTENT AREA --- */
+        main { min-height: 100vh; padding-top: 100px; }
 
-        .nav-auth:hover {
-            background: var(--premium-gold);
-            color: var(--deep-emerald) !important;
-        }
-
-        /* ================= MAIN ================= */
-        main {
-            min-height: 80vh;
-        }
-
-        /* ================= FOOTER ================= */
+        /* --- FOOTER: DARK & PRESTIGIOUS --- */
         footer {
-            background: var(--deep-emerald);
-            color: var(--pure-white);
-            padding: 80px 8% 40px;
+            background: var(--emerald-deep);
+            color: #fff;
+            padding: 100px 8% 40px;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 60px;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 50px;
         }
 
         .footer-col h4 {
-            color: var(--premium-gold);
+            color: var(--gold-accent);
+            font-family: 'Playfair Display', serif;
             margin-bottom: 25px;
-            text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 2px;
+            font-size: 1.2rem;
         }
 
-        .footer-col p, .footer-col a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            font-size: 14px;
+        .footer-col a {
             display: block;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
             margin-bottom: 12px;
+            font-size: 0.9rem;
             transition: var(--transition);
         }
 
-        .footer-col a:hover {
-            color: var(--premium-gold);
-            padding-left: 5px;
+        .footer-col a:hover { color: #fff; padding-left: 5px; }
+
+        .legal-row {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 30px;
-            text-align: center;
-            font-size: 12px;
-            color: rgba(255,255,255,0.5);
-        }
-
-        /* ================= RESPONSIVE ================= */
-        @media (max-width: 992px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .nav-links {
-                display: none; /* Future: mobile menu */
-            }
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .nav-menu { display: none; } /* Add hamburger icon here later */
         }
     </style>
-
-    {% block extra_styles %}{% endblock %}
 </head>
-
 <body>
 
-<!-- ================= NAV ================= -->
-<nav>
-    <a href="/" class="logo">CONSTRUCT<span>EXECUTIVE</span></a>
+<nav id="mainNav">
+    <a href="/" class="brand-container">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="CES Logo" class="brand-logo">
+        <span class="brand-name">Construct<span style="color:#fff;">Exec</span></span>
+    </a>
 
-    <div class="nav-links">
+    <div class="nav-menu">
         <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/services">Services</a>
-        <a href="/industries">Industries</a>
-        <a href="/blog">Insights</a>
-
-        <!-- ================= AUTH LOGIC ================= -->
+        <a href="/about">Firm</a>
+        <a href="/services">Expertise</a>
+        <a href="/industries">Sectors</a>
+        
         {% if session.get("user_id") %}
-
-            {% if session.get("role") == "admin" %}
-                <a href="/admin">Dashboard</a>
-
-            {% elif session.get("role") == "talent" %}
-                <a href="/talent/dashboard">My Profile</a>
-
-            {% elif session.get("role") == "client" %}
-                <a href="/client/dashboard">My Engagements</a>
-            {% endif %}
-
-            <a href="/logout" class="nav-auth">Logout</a>
-
+            <a href="/logout">Logout</a>
         {% else %}
-
             <a href="/login">Login</a>
-            <a href="/register/talent" class="nav-auth">Join Talent</a>
-            <a href="/register/client" class="nav-auth">For Companies</a>
-
         {% endif %}
-
-        <a href="/contact" class="nav-cta">Work With Us</a>
+        
+        <a href="/contact" class="cta-gold">Partner With Us</a>
     </div>
 </nav>
 
-<!-- ================= CONTENT ================= -->
 <main>
     {% block content %}{% endblock %}
 </main>
 
-<!-- ================= FOOTER ================= -->
 <footer>
     <div class="footer-grid">
-
         <div class="footer-col">
-            <h4 style="color:white; font-weight:800;">Construct Executive</h4>
-            <p>Zambia's premier leadership consultancy, dedicated to identifying and securing the architects of future industry success.</p>
+            <h4>CONSTRUCT EXECUTIVE</h4>
+            <p style="color: rgba(255,255,255,0.6); line-height: 1.8;">
+                Architects of leadership. We secure the executive talent that builds Zambia's industrial future.
+            </p>
         </div>
-
         <div class="footer-col">
-            <h4>Firm</h4>
-            <a href="/about">Our Story</a>
-            <a href="/services">Expertise</a>
-            <a href="/industries">Sectors</a>
-            <a href="/blog">Insights</a>
+            <h4>Solutions</h4>
+            <a href="#">Retained Search</a>
+            <a href="#">Board Advisory</a>
+            <a href="#">Interim Leadership</a>
         </div>
-
         <div class="footer-col">
-            <h4>Support</h4>
-            <a href="/contact">Contact</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+            <h4>Sectors</h4>
+            <a href="#">Mining & Energy</a>
+            <a href="#">FinTech</a>
+            <a href="#">Infrastructure</a>
         </div>
-
         <div class="footer-col">
             <h4>Connect</h4>
-            <p>Lusaka, Zambia</p>
-            <p>Email: info@constructexec.co.zm</p>
-            <p>Tel: +260 XXX XXX XXX</p>
+            <p style="color: rgba(255,255,255,0.6);">Lusaka, Zambia</p>
+            <a href="mailto:info@constructexec.co.zm">Contact Registry</a>
         </div>
-
     </div>
 
-    <div class="footer-bottom">
-        © 2026 CONSTRUCT EXECUTIVE SEARCH ZAMBIA. ALL RIGHTS RESERVED.
+    <div class="legal-row">
+        <span>© 2026 CONSTRUCT EXECUTIVE SEARCH ZAMBIA. ALL RIGHTS RESERVED.</span>
+        <span>DISCRETE . STRATEGIC . LOCAL</span>
     </div>
 </footer>
 
-{% block extra_scripts %}{% endblock %}
+<script>
+    // Smooth Navbar Transition
+    window.onscroll = function() {
+        var nav = document.getElementById('mainNav');
+        if (window.pageYOffset > 50) {
+            nav.classList.add("scrolled");
+        } else {
+            nav.classList.remove("scrolled");
+        }
+    };
+</script>
 
+{% block extra_scripts %}{% endblock %}
 </body>
 </html>

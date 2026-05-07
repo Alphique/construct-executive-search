@@ -1,60 +1,31 @@
 {% extends "public/base.html" %}
 
-{% block title %}Construct Executive Search | Defining African Leadership{% endblock %}
+{% block title %}Construct Executive Search | Premier Leadership Partners{% endblock %}
 
 {% block content %}
-<!-- Typography & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,300&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
 :root {
-    --emerald: #003328;
-    --gold: #c9a84c;
-    --gold-dim: #9d823b;
-    --obsidian: #0a0a0a;
-    --ivory: #fcfaf7;
+    --emerald-deep: #00241b;
+    --emerald-glow: #003d2f;
+    --gold-foil: linear-gradient(135deg, #c9a84c 0%, #e8d5a3 50%, #c9a84c 100%);
+    --gold-solid: #c9a84c;
     --glass: rgba(255, 255, 255, 0.03);
-    --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    --border-white: rgba(255, 255, 255, 0.1);
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--obsidian);
-    color: var(--ivory);
+    background-color: var(--emerald-deep);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
     overflow-x: hidden;
-    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* --- Reveal Animations --- */
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: var(--transition);
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* --- Navigation Overwrite (Assuming base.html has nav, but let's style for premium) --- */
-.premium-nav {
-    position: fixed;
-    top: 0; width: 100%;
-    padding: 30px 8%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.8), transparent);
-    backdrop-filter: blur(10px);
-}
-
-/* --- Hero Section: Cinematic --- */
+/* --- THE HERO (Video Integrated) --- */
 .hero {
     position: relative;
     height: 100vh;
@@ -65,302 +36,263 @@ body {
     overflow: hidden;
 }
 
-.hero-video-container {
+.video-container {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
-.hero-video-container video {
-    width: 100%; height: 100%;
+.video-container video {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    opacity: 0.4; /* Sophisticated dimming */
+    opacity: 0.4; /* Soft focus for the background animation */
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, transparent 0%, var(--obsidian) 100%);
-    z-index: 1;
+    background: linear-gradient(to bottom, rgba(0,36,27,0.8), rgba(0,36,27,1));
+    z-index: 0;
 }
 
-.hero-content {
+.hero-content-wrapper {
     position: relative;
-    z-index: 2;
+    z-index: 10;
     text-align: center;
-    max-width: 1000px;
-    padding: 0 20px;
+    max-width: 1200px;
+    padding: 0 5%;
 }
 
-.hero-logo {
+.ces-logo-main {
     width: 180px;
     margin-bottom: 40px;
-    filter: brightness(0) invert(1);
-    animation: fadeIn 2s ease-out;
+    filter: drop-shadow(0 0 20px rgba(201,168,76,0.3));
+    animation: fadeInUp 1.2s ease forwards;
 }
 
 .hero h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    line-height: 0.95;
     font-weight: 300;
-    line-height: 0.9;
-    letter-spacing: -2px;
     margin-bottom: 30px;
+    letter-spacing: -2px;
 }
 
-.hero h1 em {
-    color: var(--gold);
+.hero h1 span {
+    background: var(--gold-foil);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-style: italic;
+    display: block;
 }
 
-.hero-cta-group {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 40px;
+/* --- PREMIUM UI COMPONENTS --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-/* --- Buttons: Minimalist Luxury --- */
-.btn-lux {
-    padding: 18px 45px;
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.btn-premium {
+    padding: 20px 50px;
+    background: transparent;
+    border: 1px solid var(--gold-solid);
+    color: var(--gold-solid);
     text-transform: uppercase;
-    font-size: 11px;
+    letter-spacing: 5px;
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 4px;
-    text-decoration: none;
-    transition: var(--transition);
     position: relative;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: var(--ivory);
+    overflow: hidden;
+    transition: 0.4s;
+    cursor: pointer;
 }
 
-.btn-lux.primary {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--emerald);
+.btn-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gold-foil);
+    transition: 0.5s;
+    z-index: -1;
 }
 
-.btn-lux:hover {
-    transform: translateY(-5px);
-    background: var(--ivory);
-    color: var(--obsidian);
+.btn-premium:hover {
+    color: var(--emerald-deep);
 }
 
-/* --- The "Grid of Excellence" --- */
-.stats-strip {
+.btn-premium:hover::before {
+    left: 0;
+}
+
+/* --- STATS SECTION --- */
+.stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid rgba(255,255,255,0.1);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    background: var(--obsidian);
+    gap: 2px;
+    background: var(--border-white);
+    margin-top: 100px;
 }
 
 .stat-item {
-    padding: 60px 40px;
+    background: var(--emerald-deep);
+    padding: 40px;
     text-align: center;
-    border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-.stat-item:last-child { border-right: none; }
-
-.stat-num {
+.stat-number {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 4rem;
-    color: var(--gold);
+    font-size: 3.5rem;
+    color: var(--gold-solid);
     display: block;
 }
 
 .stat-label {
-    font-size: 10px;
-    letter-spacing: 3px;
+    font-size: 9px;
     text-transform: uppercase;
-    color: var(--gold-dim);
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.4);
 }
 
-/* --- Services: Editorial Layout --- */
-.section-padding { padding: 160px 8%; }
+/* --- SERVICES (The Monolith Design) --- */
+.services-section {
+    padding: 150px 8%;
+    background: #fff;
+    color: var(--emerald-deep);
+}
 
-.service-row {
+.service-grid-new {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    align-items: center;
-    margin-bottom: 120px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
 }
 
-.service-image {
-    position: relative;
-    height: 600px;
-    overflow: hidden;
+.service-card-new {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 40px 0;
+    transition: 0.5s;
 }
 
-.service-image img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%) contrast(110%);
-    transition: var(--transition);
+.service-card-new:hover {
+    padding-left: 20px;
+    border-color: var(--gold-solid);
 }
 
-.service-row:hover .service-image img {
-    filter: grayscale(0%);
-    transform: scale(1.05);
-}
-
-.service-text h2 {
+.service-card-new h3 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5rem;
-    font-weight: 300;
-    margin-bottom: 30px;
+    font-size: 2rem;
+    margin-bottom: 15px;
 }
 
-/* --- Dark Emerald Section --- */
-.emerald-wrap {
-    background-color: var(--emerald);
-    color: var(--ivory);
+.service-card-new p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.8;
 }
 
-/* --- Floating Contact Card --- */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    background: var(--ivory);
-    color: var(--obsidian);
-}
-
-@keyframes fadeIn {
+/* --- ANIMATIONS --- */
+@keyframes fadeInUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Mobile Fixes */
-@media (max-width: 992px) {
-    .service-row { grid-template-columns: 1fr; gap: 40px; }
-    .hero h1 { font-size: 3.5rem; }
-    .stats-strip { grid-template-columns: 1fr; }
-    .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+@media (max-width: 768px) {
+    .stats-grid { grid-template-columns: 1fr; }
 }
 </style>
 
-<!-- Hero Section -->
 <section class="hero">
-    <div class="hero-video-container">
-        <!-- Using your animation as a looping background -->
-        <video autoplay muted loop playsinline>
-            <source src="/static/images/your_logo_animation.mp4" type="video/mp4">
+    <div class="video-container">
+        <video autoplay muted loop playsinline poster="/static/images/cesbg.png">
+            <source src="/static/images/animation.mp4" type="video/mp4">
         </video>
     </div>
     <div class="hero-overlay"></div>
     
-    <div class="hero-content">
-        <img src="/static/images/ces_logo.png" alt="CES Logo" class="hero-logo">
-        <h1 class="reveal">The Architect of <br><em>Executive</em> Success.</h1>
-        <p class="reveal" style="letter-spacing: 2px; text-transform: uppercase; font-size: 12px; color: var(--gold);">Zambia • SADC • Global</p>
+    <div class="hero-content-wrapper">
+        <img src="/static/images/logo.png" alt="CES Logo" class="ces-logo-main">
+        <h1>
+            Architecting The <span>Future of Leadership</span>
+        </h1>
+        <div class="hero-actions" style="margin-top: 50px;">
+            <button class="btn-premium" onclick="location.href='/contact'">Initiate Mandate</button>
+        </div>
         
-        <div class="hero-cta-group reveal">
-            <a href="/contact" class="btn-lux primary">Start a Mandate</a>
-            <a href="/about" class="btn-lux">Our Philosophy</a>
+        <div class="stats-grid reveal">
+            <div class="stat-item">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">Years of Tenure</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Execs Placed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">98%</span>
+                <span class="stat-label">Placement Retention</span>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Stats Strip -->
-<div class="stats-strip">
-    <div class="stat-item reveal">
-        <span class="stat-num" data-target="15">0</span>
-        <span class="stat-label">Years Excellence</span>
-    </div>
-    <div class="stat-item reveal">
-        <span class="stat-num" data-target="500">0</span>
-        <span class="stat-label">Leaders Placed</span>
-    </div>
-    <div class="stat-item reveal">
-        <span class="stat-num" data-target="98">0</span>
-        <span class="stat-label">Retention Rate %</span>
-    </div>
-</div>
-
-<!-- Expertise Section -->
-<section class="section-padding">
-    <div class="service-row">
-        <div class="service-image reveal">
-            <img src="/static/images/cesbg.png" alt="Boardroom">
-        </div>
-        <div class="service-text reveal">
-            <span style="color: var(--gold); text-transform: uppercase; font-size: 10px; letter-spacing: 4px;">01. Search</span>
-            <h2>Executive <br><em>Acquisition</em></h2>
-            <p>We don't find candidates; we identify leaders who are currently transforming industries. Our search is surgical, discreet, and exhaustive.</p>
-            <br>
-            <a href="/services" class="btn-lux" style="border: none; padding-left: 0;">Explore Methodology →</a>
-        </div>
+<section class="services-section">
+    <div class="reveal" style="margin-bottom: 80px;">
+        <span style="color: var(--gold-solid); font-weight: 700; letter-spacing: 5px; font-size: 11px; text-transform: uppercase;">Our Methodology</span>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; margin-top: 10px;">Precision at Scale.</h2>
     </div>
 
-    <div class="service-row" style="direction: rtl;">
-        <div class="service-image reveal">
-            <!-- Place a second high-res image here -->
-            <img src="/static/images/cesbg.png" alt="Leadership" style="direction: ltr;">
+    <div class="service-grid-new">
+        <div class="service-card-new reveal">
+            <h3>Executive Search</h3>
+            <p>We leverage a global network and local intelligence to secure leaders who don't just fill a seat, but drive institutional evolution.</p>
         </div>
-        <div class="service-text reveal" style="direction: ltr;">
-            <span style="color: var(--gold); text-transform: uppercase; font-size: 10px; letter-spacing: 4px;">02. Intelligence</span>
-            <h2>Market <br><em>Mapping</em></h2>
-            <p>Know the landscape before you move. We provide deep-tissue intelligence on Zambian and regional SADC talent movements and compensation structures.</p>
-            <br>
-            <a href="/services" class="btn-lux" style="border: none; padding-left: 0;">View Intelligence →</a>
+        <div class="service-card-new reveal">
+            <h3>Board Advisory</h3>
+            <p>Succession planning and board composition strategies designed for the unique complexities of the African economic landscape.</p>
+        </div>
+        <div class="service-card-new reveal">
+            <h3>Market Intelligence</h3>
+            <p>Proprietary data on talent trends, compensation benchmarking, and competitor mapping within the SADC region.</p>
         </div>
     </div>
 </section>
 
-<!-- Contact Block -->
-<section class="contact-grid reveal">
-    <div class="section-padding" style="background: var(--emerald); color: white;">
-        <h2 style="font-family: 'Cormorant Garamond'; font-size: 4rem; line-height: 1;">Secure Your <br>Next Leader.</h2>
-        <p style="margin: 30px 0; opacity: 0.7;">Discretion is our hallmark. Connect with our Principal Consultant today.</p>
-        <a href="/contact" class="btn-lux primary">Inquire Privately</a>
-    </div>
-    <div class="section-padding">
-        <h4 style="text-transform: uppercase; letter-spacing: 3px; font-size: 12px; margin-bottom: 20px;">Contact</h4>
-        <p>Lusaka, Zambia</p>
-        <p>info@constructes.com</p>
-        <p>+260 970 000 000</p>
-        <div style="margin-top: 40px;">
-            <a href="#" style="color: var(--emerald); margin-right: 20px;"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" style="color: var(--emerald);"><i class="fab fa-twitter"></i></a>
-        </div>
+<section style="padding: 150px 8%; background: var(--emerald-glow); text-align: center;">
+    <div class="reveal">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin-bottom: 40px;">Ready to elevate your board?</h2>
+        <a href="/contact" class="btn-premium">Schedule Private Consultation</a>
     </div>
 </section>
-
-<footer style="padding: 40px 8%; text-align: center; font-size: 10px; opacity: 0.4; letter-spacing: 2px; text-transform: uppercase;">
-    © 2026 Construct Executive Search. All Rights Reserved.
-</footer>
 
 <script>
-// Intersection Observer for Reveal Animations
-const observerOptions = { threshold: 0.1 };
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            if(entry.target.querySelector('.stat-num')) {
-                animateNumber(entry.target.querySelector('.stat-num'));
-            }
+// Scroll Reveal Logic
+function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
         }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Premium Number Counter
-function animateNumber(el) {
-    const target = +el.getAttribute('data-target');
-    let count = 0;
-    const speed = 2000 / target;
-    const updateCount = () => {
-        count++;
-        el.innerText = count;
-        if(count < target) setTimeout(updateCount, speed);
-        else el.innerText = target;
-    };
-    updateCount();
+    }
 }
+
+window.addEventListener("scroll", reveal);
+document.addEventListener("DOMContentLoaded", reveal);
 </script>
+
 {% endblock %}
