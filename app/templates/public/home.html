@@ -4,98 +4,170 @@
 
 {% block content %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,300&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --emerald-deep: #00241b;
-    --emerald-glow: #003d2f;
-    --gold-foil: linear-gradient(135deg, #c9a84c 0%, #e8d5a3 50%, #c9a84c 100%);
-    --gold-solid: #c9a84c;
-    --glass: rgba(255, 255, 255, 0.03);
-    --border-white: rgba(255, 255, 255, 0.1);
+    --emerald-obsidian: #001a14;
+    --emerald-regal: #002b21;
+    --gold-leaf: #c5a059;
+    --ivory-clean: #fcfaf7;
+    --glass-white: rgba(255, 255, 255, 0.03);
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 body {
-    background-color: var(--emerald-deep);
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+    background-color: var(--emerald-obsidian);
+    color: var(--ivory-clean);
 }
 
-/* --- THE HERO (Video Integrated) --- */
+/* --- HERO: DEPTH & FOCUS --- */
 .hero {
     position: relative;
     height: 100vh;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
 }
 
-.video-container {
+.video-bg {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+    inset: 0;
+    z-index: -2;
 }
 
-.video-container video {
+.video-bg video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.4; /* Soft focus for the background animation */
+    filter: saturate(0.5) brightness(0.4);
 }
 
-.hero-overlay {
+.hero-vignette {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0,36,27,0.8), rgba(0,36,27,1));
-    z-index: 0;
+    background: radial-gradient(circle, rgba(0,26,20,0.2) 0%, rgba(0,26,20,0.9) 100%);
+    z-index: -1;
 }
 
-.hero-content-wrapper {
-    position: relative;
-    z-index: 10;
+.hero-content {
     text-align: center;
-    max-width: 1200px;
-    padding: 0 5%;
+    z-index: 10;
+    max-width: 900px;
 }
 
-.ces-logo-main {
-    width: 180px;
-    margin-bottom: 40px;
-    filter: drop-shadow(0 0 20px rgba(201,168,76,0.3));
-    animation: fadeInUp 1.2s ease forwards;
+/* LOGO ENTRANCE ANIMATION */
+.ces-hero-logo {
+    width: 120px;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+    animation: logoEntrance 1.5s var(--ease-out-expo) forwards;
+    filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.2));
+}
+
+@keyframes logoEntrance {
+    to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .hero h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 8vw, 5.5rem);
-    line-height: 0.95;
+    font-size: clamp(3rem, 7vw, 6rem);
     font-weight: 300;
-    margin-bottom: 30px;
-    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 40px;
 }
 
 .hero h1 span {
-    background: var(--gold-foil);
+    display: block;
+    font-style: italic;
+    background: linear-gradient(90deg, #c5a059, #f4e9d5, #c5a059);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-style: italic;
+}
+
+/* --- FLOATING STATS (Glassmorphism) --- */
+.floating-stats {
+    display: flex;
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-top: 60px;
+    opacity: 0;
+    animation: fadeInUp 1s var(--ease-out-expo) 0.5s forwards;
+}
+
+.stat-box {
+    padding: 30px 50px;
+    background: var(--emerald-obsidian);
+    text-align: center;
+}
+
+.stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--gold-leaf);
     display: block;
 }
 
-/* --- PREMIUM UI COMPONENTS --- */
+.stat-tag {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(252, 250, 247, 0.5);
+}
+
+/* --- METHODOLOGY (The Ivory Balance) --- */
+.methodology {
+    background: var(--ivory-clean);
+    color: var(--emerald-regal);
+    padding: 160px 10%;
+}
+
+.section-tag {
+    color: var(--gold-leaf);
+    font-weight: 700;
+    letter-spacing: 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.methodology-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    margin-top: 40px;
+}
+
+.service-card {
+    padding: 40px 0;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    transition: var(--ease-out-expo) 0.4s;
+}
+
+.service-card:hover {
+    border-top-color: var(--gold-leaf);
+    transform: translateY(-5px);
+}
+
+.service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.service-card p {
+    color: #555;
+    line-height: 1.8;
+}
+
+/* --- REVEAL EFFECTS --- */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
+    transform: translateY(40px);
+    transition: all 1.2s var(--ease-out-expo);
 }
 
 .reveal.active {
@@ -103,196 +175,237 @@ body {
     transform: translateY(0);
 }
 
-.btn-premium {
-    padding: 20px 50px;
-    background: transparent;
-    border: 1px solid var(--gold-solid);
-    color: var(--gold-solid);
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    font-size: 10px;
-    font-weight: 700;
-    position: relative;
-    overflow: hidden;
-    transition: 0.4s;
-    cursor: pointer;
-}
-
-.btn-premium::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: var(--gold-foil);
-    transition: 0.5s;
-    z-index: -1;
-}
-
-.btn-premium:hover {
-    color: var(--emerald-deep);
-}
-
-.btn-premium:hover::before {
-    left: 0;
-}
-
-/* --- STATS SECTION --- */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    background: var(--border-white);
-    margin-top: 100px;
-}
-
-.stat-item {
-    background: var(--emerald-deep);
-    padding: 40px;
-    text-align: center;
-}
-
-.stat-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5rem;
-    color: var(--gold-solid);
-    display: block;
-}
-
-.stat-label {
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: rgba(255,255,255,0.4);
-}
-
-/* --- SERVICES (The Monolith Design) --- */
-.services-section {
-    padding: 150px 8%;
-    background: #fff;
-    color: var(--emerald-deep);
-}
-
-.service-grid-new {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
-}
-
-.service-card-new {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    padding: 40px 0;
-    transition: 0.5s;
-}
-
-.service-card-new:hover {
-    padding-left: 20px;
-    border-color: var(--gold-solid);
-}
-
-.service-card-new h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    margin-bottom: 15px;
-}
-
-.service-card-new p {
-    font-size: 0.9rem;
-    color: #666;
-    line-height: 1.8;
-}
-
-/* --- ANIMATIONS --- */
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 768px) {
-    .stats-grid { grid-template-columns: 1fr; }
+/* Responsive */
+@media (max-width: 900px) {
+    .methodology-grid { grid-template-columns: 1fr; gap: 40px; }
+    .floating-stats { flex-direction: column; }
 }
 </style>
 
 <section class="hero">
-    <div class="video-container">
-        <video autoplay muted loop playsinline poster="/static/images/cesbg.png">
-            <source src="/static/images/animation.mp4" type="video/mp4">
+    <div class="video-bg">
+        <video autoplay muted loop playsinline>
+            <source src="{{ url_for('static', filename='images/animation.mp4') }}" type="video/mp4">
         </video>
     </div>
-    <div class="hero-overlay"></div>
+    <div class="hero-vignette"></div>
     
-    <div class="hero-content-wrapper">
-        <img src="/static/images/logo.png" alt="CES Logo" class="ces-logo-main">
-        <h1>
-            Architecting The <span>Future of Leadership</span>
-        </h1>
-        <div class="hero-actions" style="margin-top: 50px;">
-            <button class="btn-premium" onclick="location.href='/contact'">Initiate Mandate</button>
-        </div>
+    <div class="hero-content">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Construct Executive Search" class="ces-hero-logo">
+        <h1>Architecting The<br><span>Future of Leadership</span></h1>
         
-        <div class="stats-grid reveal">
-            <div class="stat-item">
+        <button class="btn-premium" onclick="location.href='/contact'">Initiate Private Mandate</button>
+
+        <div class="floating-stats">
+            <div class="stat-box">
                 <span class="stat-number">15+</span>
-                <span class="stat-label">Years of Tenure</span>
+                <span class="stat-tag">Years Tenure</span>
             </div>
-            <div class="stat-item">
-                <span class="stat-number">500+</span>
-                <span class="stat-label">Execs Placed</span>
-            </div>
-            <div class="stat-item">
+            <div class="stat-box">
                 <span class="stat-number">98%</span>
-                <span class="stat-label">Placement Retention</span>
+                <span class="stat-tag">Retention</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">500+</span>
+                <span class="stat-tag">Placements</span>
             </div>
         </div>
     </div>
 </section>
 
-<section class="services-section">
-    <div class="reveal" style="margin-bottom: 80px;">
-        <span style="color: var(--gold-solid); font-weight: 700; letter-spacing: 5px; font-size: 11px; text-transform: uppercase;">Our Methodology</span>
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; margin-top: 10px;">Precision at Scale.</h2>
+<section class="methodology">
+    <div class="reveal">
+        <span class="section-tag">Elite Methodology</span>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 4rem; line-height: 1.1; margin: 20px 0 60px;">Precision is the only<br>metric that matters.</h2>
     </div>
 
-    <div class="service-grid-new">
-        <div class="service-card-new reveal">
+    <div class="methodology-grid">
+        <div class="service-card reveal">
             <h3>Executive Search</h3>
-            <p>We leverage a global network and local intelligence to secure leaders who don't just fill a seat, but drive institutional evolution.</p>
+            <p>Discrete, research-driven acquisition of Tier-1 leadership talent across the SADC industrial landscape.</p>
         </div>
-        <div class="service-card-new reveal">
+        <div class="service-card reveal">
             <h3>Board Advisory</h3>
-            <p>Succession planning and board composition strategies designed for the unique complexities of the African economic landscape.</p>
+            <p>Strategic counsel on board composition, ensuring governance structures are resilient and future-ready.</p>
         </div>
-        <div class="service-card-new reveal">
-            <h3>Market Intelligence</h3>
-            <p>Proprietary data on talent trends, compensation benchmarking, and competitor mapping within the SADC region.</p>
+        <div class="service-card reveal">
+            <h3>Talent Intelligence</h3>
+            <p>Real-time data on regional salary benchmarks, competitor moves, and emerging leadership trends.</p>
+        </div>
+        <div class="service-card reveal">
+            <h3>Interim Solutions</h3>
+            <p>Deployment of high-impact specialists to bridge critical leadership gaps during institutional transitions.</p>
         </div>
     </div>
 </section>
 
-<section style="padding: 150px 8%; background: var(--emerald-glow); text-align: center;">
+<section style="padding: 150px 8%; background: var(--emerald-regal); text-align: center;">
     <div class="reveal">
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin-bottom: 40px;">Ready to elevate your board?</h2>
-        <a href="/contact" class="btn-premium">Schedule Private Consultation</a>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; margin-bottom: 40px; font-weight: 300;">Ready to secure your architect?</h2>
+        <button class="btn-premium" onclick="location.href='/contact'">Request a Consultation</button>
     </div>
 </section>
 
 <script>
-// Scroll Reveal Logic
-function reveal() {
-    var reveals = document.querySelectorAll(".reveal");
-    for (var i = 0; i < reveals.length; i++) {
-        var windowHeight = window.innerHeight;
-        var elementTop = reveals[i].getBoundingClientRect().top;
-        var elementVisible = 150;
-        if (elementTop < windowHeight - elementVisible) {
-            reveals[i].classList.add("active");
+// Improved Reveal Logic
+const revealElements = document.querySelectorAll('.reveal');
+const revealOnScroll = () => {
+    revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            el.classList.add('active');
         }
-    }
+    });
+};
+
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+</script>
+<style>
+:root {
+    --emerald-obsidian: #001a14;
+    --emerald-regal: #002b21;
+    --gold-leaf: #c5a059;
+    --gold-soft: #e2c999;
+    --ivory-clean: #fcfaf7;
+    --white-pure: #ffffff;
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-window.addEventListener("scroll", reveal);
-document.addEventListener("DOMContentLoaded", reveal);
-</script>
+/* --- TYPE UPGRADE --- */
+body {
+    background-color: var(--emerald-obsidian);
+    color: var(--ivory-clean);
+    font-family: 'Plus Jakarta Sans', sans-serif; /* Modern, clear, expensive feel */
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: -0.02em;
+}
+
+/* --- HERO ENHANCEMENT --- */
+.hero-content h1 {
+    font-size: clamp(3.5rem, 8vw, 7.5rem); /* Larger, more commanding */
+    font-weight: 300;
+    line-height: 0.95;
+    margin-bottom: 50px;
+    letter-spacing: -1px;
+}
+
+.hero-content h1 span {
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(to right, var(--gold-leaf), var(--gold-soft), var(--gold-leaf));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+/* --- THE "POP" BUTTON --- */
+.btn-premium {
+    background: transparent;
+    color: var(--gold-leaf);
+    border: 1px solid var(--gold-leaf);
+    padding: 20px 45px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s var(--ease-out-expo);
+    cursor: pointer;
+}
+
+.btn-premium:hover {
+    color: var(--emerald-obsidian);
+    background: var(--gold-leaf);
+    box-shadow: 0 10px 30px rgba(197, 160, 89, 0.3);
+}
+
+/* --- STATS: BORDERLESS & CLEAN --- */
+.floating-stats {
+    display: flex;
+    gap: 80px; /* More breathing room */
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    margin-top: 80px;
+    justify-content: center;
+}
+
+.stat-box {
+    background: transparent;
+    padding: 0;
+    position: relative;
+}
+
+.stat-box::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 1px;
+    background: var(--gold-leaf);
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+/* --- METHODOLOGY: CORPORATE CLARITY --- */
+.methodology {
+    padding: 180px 12%; /* Increased padding for "luxury" feel */
+}
+
+.section-tag {
+    display: block;
+    margin-bottom: 15px;
+    border-left: 2px solid var(--gold-leaf);
+    padding-left: 15px;
+}
+
+.service-card {
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding-top: 60px;
+    transition: all 0.6s var(--ease-out-expo);
+}
+
+.service-card h3 {
+    font-size: 2.8rem; /* Pop the titles */
+    color: var(--emerald-regal);
+    margin-bottom: 25px;
+}
+
+.service-card p {
+    font-size: 1.1rem;
+    max-width: 90%;
+    color: #4a4a4a;
+}
+
+/* Subtle "Ink" reveal effect */
+.reveal {
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-size: 100% 200%;
+    mask-position: 0 100%;
+    transition: mask-position 1s var(--ease-out-expo), transform 1s var(--ease-out-expo), opacity 1s;
+}
+
+.reveal.active {
+    mask-position: 0 0;
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
 
 {% endblock %}
