@@ -3,409 +3,373 @@
 {% block title %}Construct Executive Search | Premier Leadership Partners{% endblock %}
 
 {% block content %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Construct Executive Search | Premier Leadership Architecture</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --emerald-abyss: #00140e;
+      --emerald-deep: #00251a;
+      --emerald-regal: #00382a;
+      --gold-prime: #c5a059;
+      --gold-soft: #e2c999;
+      --ivory-pure: #fcfaf7;
+      --white-soft: #f5f2eb;
+      --ease-expo: cubic-bezier(0.76, 0, 0.24, 1);
+    }
 
-<style>
-:root {
-    --emerald-obsidian: #001a14;
-    --emerald-regal: #002b21;
-    --gold-leaf: #c5a059;
-    --ivory-clean: #fcfaf7;
-    --glass-white: rgba(255, 255, 255, 0.03);
-    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-    background-color: var(--emerald-obsidian);
-    color: var(--ivory-clean);
-}
+    body {
+      background-color: var(--emerald-abyss);
+      color: var(--ivory-pure);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-/* --- HERO: DEPTH & FOCUS --- */
-.hero {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
+    /* =========================
+       HEADER
+    ========================= */
+    .site-header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      height: 72px; padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(0,20,14,0.88), rgba(0,20,14,0.12));
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .header-brand {
+      font-size: 1.2rem; font-weight: 700; letter-spacing: -0.03em;
+      color: var(--gold-soft); white-space: nowrap;
+    }
+    .header-nav { display: flex; gap: 2.5rem; }
+    .header-nav a {
+      color: rgba(252,250,247,0.82); text-decoration: none;
+      font-size: 0.66rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; transition: color .3s ease;
+    }
+    .header-nav a:hover { color: var(--gold-prime); }
+    .header-cta {
+      height: 38px; padding: 0 22px; display: flex; align-items: center;
+      border: 1px solid rgba(197,160,89,0.6); color: var(--gold-soft);
+      text-decoration: none; font-size: 0.64rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      transition: all .35s cubic-bezier(0.19,1,0.22,1);
+    }
+    .header-cta:hover { background: var(--gold-prime); color: #02110c; }
 
-.video-bg {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-}
+    /* ============================================================
+       HERO STAGE
+       TOTAL LOOP DURATION: 5s
+       Change the "5s" in ALL animation properties below to adjust
+    ============================================================ */
+    .hero-stage {
+      position: relative; min-height: 100vh; overflow: hidden; background: #02110c;
+    }
 
-.video-bg video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: saturate(0.5) brightness(0.4);
-}
+    /* MASTER VIDEO */
+    .hero-master-video { position: absolute; inset: 0; z-index: 1; }
+    .hero-master-video video {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.5) saturate(0.78) contrast(1.04);
+      animation: heroVideoMotion 5s cubic-bezier(0.76,0,0.24,1) infinite;
+      transform-origin: center center;
+    }
 
-.hero-vignette {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle, rgba(0,26,20,0.2) 0%, rgba(0,26,20,0.9) 100%);
-    z-index: -1;
-}
+    /*
+      VIDEO MOTION
+      translateX(140px) = rightward push (higher = more right)
+      scale(1.24)       = starting zoom
+      scale(1)          = zoomed out
+    */
+    @keyframes heroVideoMotion {
+      0%, 28%   { transform: scale(1.24) translateX(0px); }
+      44%, 64%  { transform: scale(1) translateX(140px); }
+      100%      { transform: scale(1.24) translateX(0px); }
+    }
 
-.hero-content {
-    text-align: center;
-    z-index: 10;
-    max-width: 900px;
-}
+    /* ATMOSPHERIC OVERLAY */
+    .hero-stage::before {
+      content: ""; position: absolute; inset: 0; z-index: 2;
+      background:
+        radial-gradient(circle at top right, rgba(197,160,89,0.06), transparent 30%),
+        linear-gradient(90deg, rgba(0,20,14,0.78) 0%, rgba(0,20,14,0.38) 35%, rgba(0,20,14,0.04) 72%, rgba(0,20,14,0.01) 100%);
+    }
 
-/* LOGO ENTRANCE ANIMATION */
-.ces-hero-logo {
-    width: 120px;
-    margin-bottom: 30px;
-    opacity: 0;
-    transform: scale(0.9) translateY(20px);
-    animation: logoEntrance 1.5s var(--ease-out-expo) forwards;
-    filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.2));
-}
+    /* AMBIENT BLOOM */
+    .hero-stage::after {
+      content: ""; position: absolute; width: 500px; height: 500px;
+      top: -140px; right: -120px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(197,160,89,0.07), transparent 70%);
+      filter: blur(60px); z-index: 2; pointer-events: none;
+      animation: ambientFloat 5s ease-in-out infinite;
+    }
+    @keyframes ambientFloat {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      50%      { transform: translateY(16px) translateX(-12px); }
+    }
 
-@keyframes logoEntrance {
-    to { opacity: 1; transform: scale(1) translateY(0); }
-}
+    /* TEXT PANEL */
+    .hero-text-panel {
+      position: absolute; inset: 0; z-index: 6;
+      display: flex; align-items: center; justify-content: center; padding: 0;
+      animation: heroPanelShift 5s cubic-bezier(0.76,0,0.24,1) infinite;
+    }
 
-.hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 7vw, 6rem);
-    font-weight: 300;
-    line-height: 1;
-    margin-bottom: 40px;
-}
+    /*
+      TEXT DRIFT
+      translateX(-18%) = leftward movement (higher = further left)
+      scale(0.7)       = shrunk size at left (lower = smaller)
+    */
+    @keyframes heroPanelShift {
+      0%, 28%   { transform: translateX(0%) scale(1); }
+      44%, 64%  { transform: translateX(-18%) scale(0.7); }
+      100%      { transform: translateX(0%) scale(1); }
+    }
 
-.hero h1 span {
-    display: block;
-    font-style: italic;
-    background: linear-gradient(90deg, #c5a059, #f4e9d5, #c5a059);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+    /* GLASS CARD */
+    .hero-text-inner {
+      width: min(680px, 88vw);
+      padding: 3rem 2.8rem; text-align: center;
+      position: relative; overflow: hidden; border-radius: 24px;
+      transform-origin: center left;
+      animation: panelMaterialize 5s cubic-bezier(0.76,0,0.24,1) infinite;
+    }
 
-/* --- FLOATING STATS (Glassmorphism) --- */
-.floating-stats {
-    display: flex;
-    gap: 1px;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.1);
-    margin-top: 60px;
-    opacity: 0;
-    animation: fadeInUp 1s var(--ease-out-expo) 0.5s forwards;
-}
+    @keyframes panelMaterialize {
+      0%, 28%   { backdrop-filter: blur(0px); background: rgba(255,255,255,0); border: 1px solid transparent; box-shadow: none; }
+      44%, 64%  { backdrop-filter: blur(16px); background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)); border: 1px solid rgba(197,160,89,0.14); box-shadow: 0 28px 70px rgba(0,0,0,0.4); }
+      100%      { backdrop-filter: blur(0px); background: rgba(255,255,255,0); border: 1px solid transparent; box-shadow: none; }
+    }
 
-.stat-box {
-    padding: 30px 50px;
-    background: var(--emerald-obsidian);
-    text-align: center;
-}
+    /* GOLD EDGE */
+    .hero-text-inner::before {
+      content: ""; position: absolute; top: 0; left: 0;
+      width: 1px; height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(197,160,89,0.5), transparent);
+      opacity: 0;
+      animation: accentReveal 5s cubic-bezier(0.76,0,0.24,1) infinite;
+    }
+    .hero-text-inner::after {
+      content: ""; position: absolute; top: 0; left: 0;
+      width: 40px; height: 1px;
+      background: linear-gradient(to right, rgba(197,160,89,0.6), transparent);
+      opacity: 0;
+      animation: accentReveal 5s cubic-bezier(0.76,0,0.24,1) infinite;
+    }
+    @keyframes accentReveal {
+      0%, 28%   { opacity: 0; }
+      44%, 64%  { opacity: 1; }
+      100%      { opacity: 0; }
+    }
 
-.stat-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
-    color: var(--gold-leaf);
-    display: block;
-}
+    /* LOGO */
+    .ces-hero-logo {
+      width: 62px; margin: 0 auto 1.2rem; display: block;
+      filter: drop-shadow(0 6px 14px rgba(197,160,89,0.22));
+    }
 
-.stat-tag {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(252, 250, 247, 0.5);
-}
+    /* EYEBROW */
+    .hero-eyebrow {
+      font-size: 0.56rem; font-weight: 700; letter-spacing: 0.32em;
+      text-transform: uppercase; color: var(--gold-prime);
+      margin-bottom: 0.7rem; text-align: center;
+    }
 
-/* --- METHODOLOGY (The Ivory Balance) --- */
-.methodology {
-    background: var(--ivory-clean);
-    color: var(--emerald-regal);
-    padding: 160px 10%;
-}
+    /* TITLE */
+    .hero-title {
+      font-size: clamp(2.5rem, 5.5vw, 4.8rem); font-weight: 700;
+      line-height: 0.92; color: var(--white-soft);
+      margin-bottom: 0.9rem; text-align: center;
+      text-shadow: 0 4px 28px rgba(0,0,0,0.5); letter-spacing: -0.02em;
+    }
+    .hero-title span {
+      display: block; font-style: italic; font-weight: 700;
+      background: linear-gradient(135deg, #c5a059 0%, #f4e9d5 45%, #c5a059 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-top: 0.08rem;
+    }
 
-.section-tag {
-    color: var(--gold-leaf);
-    font-weight: 700;
-    letter-spacing: 4px;
-    font-size: 11px;
-    text-transform: uppercase;
-}
+    /* DESCRIPTION */
+    .hero-description {
+      font-size: 0.82rem; font-weight: 400; line-height: 1.6;
+      color: rgba(252,250,247,0.68);
+      margin: 0 auto 1.8rem; max-width: 420px; text-align: center;
+    }
 
-.methodology-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    margin-top: 40px;
-}
+    /* BUTTON */
+    .btn-premium {
+      background: transparent; color: var(--gold-prime);
+      border: 1px solid var(--gold-prime); padding: 12px 26px;
+      font-size: 0.64rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.26em; background: rgba(0,20,14,0.28);
+      backdrop-filter: blur(8px); cursor: pointer; display: inline-block;
+      text-decoration: none; border-radius: 2px;
+      transition: all 0.4s cubic-bezier(0.19,1,0.22,1);
+    }
+    .btn-premium:hover {
+      background: var(--gold-prime); color: var(--emerald-abyss);
+      border-color: var(--gold-prime); box-shadow: 0 12px 30px rgba(197,160,89,0.28);
+      transform: translateY(-2px); letter-spacing: 0.3em;
+    }
+    .hero-actions {
+      display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;
+    }
 
-.service-card {
-    padding: 40px 0;
-    border-top: 1px solid rgba(0,0,0,0.08);
-    transition: var(--ease-out-expo) 0.4s;
-}
+    /* VIDEO REVEAL */
+    .hero-video-reveal {
+      position: absolute; inset: 0; z-index: 4; pointer-events: none;
+    }
+    .hero-video-reveal::before {
+      content: ""; position: absolute; inset: 0;
+      clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0.00), rgba(255,255,255,0.025));
+      backdrop-filter: blur(2px) brightness(1.04);
+      animation: revealMask 5s cubic-bezier(0.76,0,0.24,1) infinite;
+    }
+    /*
+      REVEAL EDGE
+      polygon(26% 0, ..., 38% 100%) = how much video shows
+      Lower first % = more video visible on the right
+    */
+    @keyframes revealMask {
+      0%, 28%   { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
+      44%, 64%  { clip-path: polygon(26% 0, 100% 0, 100% 100%, 38% 100%); opacity: 1; }
+      100%      { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
+    }
 
-.service-card:hover {
-    border-top-color: var(--gold-leaf);
-    transform: translateY(-5px);
-}
+    /* =========================
+       FOOTER
+    ========================= */
+    .site-footer {
+      background: var(--emerald-abyss);
+      border-top: 1px solid rgba(197,160,89,0.08);
+      padding: 2rem 5%; display: flex;
+      justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-info p {
+      color: rgba(252,250,247,0.38); font-size: 0.65rem;
+      font-weight: 500; letter-spacing: 0.06em;
+    }
+    .footer-links { display: flex; gap: 1.8rem; }
+    .footer-links a {
+      color: rgba(252,250,247,0.38); text-decoration: none;
+      font-size: 0.64rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold-prime); }
 
-.service-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    margin-bottom: 20px;
-}
+    /* =========================
+       RESPONSIVE
+    ========================= */
+    @media (max-width: 1024px) {
+      .hero-text-inner { width: min(520px, 88vw); padding: 2.4rem 1.8rem; }
+      @keyframes heroPanelShift {
+        0%, 28%   { transform: translateX(0%) scale(1); }
+        44%, 64%  { transform: translateX(-10%) scale(0.76); }
+        100%      { transform: translateX(0%) scale(1); }
+      }
+      @keyframes heroVideoMotion {
+        0%, 28%   { transform: scale(1.2) translateX(0px); }
+        44%, 64%  { transform: scale(1) translateX(80px); }
+        100%      { transform: scale(1.2) translateX(0px); }
+      }
+      @keyframes revealMask {
+        0%, 28%   { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
+        44%, 64%  { clip-path: polygon(34% 0, 100% 0, 100% 100%, 48% 100%); opacity: 1; }
+        100%      { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
+      }
+    }
 
-.service-card p {
-    color: #555;
-    line-height: 1.8;
-}
+    @media (max-width: 768px) {
+      .header-nav { display: none; }
+      .header-brand { font-size: 1rem; }
+      .hero-text-panel { animation: none; transform: translateX(0) scale(1); }
+      .hero-text-inner {
+        width: 100%; padding: 2rem 1.4rem; border-radius: 16px;
+        animation: none; backdrop-filter: blur(16px);
+        background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
+        border: 1px solid rgba(197,160,89,0.14); box-shadow: 0 28px 70px rgba(0,0,0,0.4);
+      }
+      .hero-text-inner::before, .hero-text-inner::after { opacity: 1; }
+      .hero-title { font-size: 1.7rem; }
+      .hero-video-reveal::before { animation: none; clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
+      .hero-master-video video { animation: none; transform: scale(1); }
+      .site-footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-brand">CONSTRUCT EXEC</div>
+    <nav class="header-nav">
+      <a href="#">Insights</a>
+      <a href="#">Home</a>
+      <a href="#">Firm</a>
+      <a href="#">Expertise</a>
+      <a href="#">Sectors</a>
+    </nav>
+    <a href="#" class="header-cta">Contact</a>
+  </header>
 
-/* --- REVEAL EFFECTS --- */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 1.2s var(--ease-out-expo);
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-    .methodology-grid { grid-template-columns: 1fr; gap: 40px; }
-    .floating-stats { flex-direction: column; }
-}
-</style>
-
-<section class="hero">
-    <div class="video-bg">
-        <video autoplay muted loop playsinline>
-            <source src="{{ url_for('static', filename='images/animation.mp4') }}" type="video/mp4">
-        </video>
+  <!-- ============================================================
+       HERO — 5s LOOP
+       Change all "5s" to adjust total duration
+       Video push: see translateX(140px) in heroVideoMotion
+       Text left: see translateX(-18%) in heroPanelShift
+       Reveal width: see polygon % in revealMask
+  ============================================================ -->
+  <section class="hero-stage">
+    <div class="hero-master-video">
+      <video autoplay muted loop playsinline>
+        <source src="{{ url_for('static', filename='images/animation.mp4') }}" type="video/mp4">
+      </video>
     </div>
-    <div class="hero-vignette"></div>
-    
-    <div class="hero-content">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Construct Executive Search" class="ces-hero-logo">
-        <h1>Architecting The<br><span>Future of Leadership</span></h1>
-        
-        <button class="btn-premium" onclick="location.href='/contact'">Initiate Private Mandate</button>
 
-        <div class="floating-stats">
-            <div class="stat-box">
-                <span class="stat-number">15+</span>
-                <span class="stat-tag">Years Tenure</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-number">98%</span>
-                <span class="stat-tag">Retention</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-number">500+</span>
-                <span class="stat-tag">Placements</span>
-            </div>
+    <div class="hero-video-reveal"></div>
+
+    <div class="hero-text-panel">
+      <div class="hero-text-inner">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="CES" class="ces-hero-logo">
+        <div class="hero-eyebrow">Executive Leadership Intelligence</div>
+        <h1 class="hero-title">
+          Architecting The
+          <span>Future of Leadership</span>
+        </h1>
+        <p class="hero-description">
+          Construct Executive Search partners with visionary organizations
+          to identify transformative leadership talent across emerging
+          and established industries.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-premium" onclick="location.href='/contact'">Initiate Private Mandate</button>
         </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<section class="methodology">
-    <div class="reveal">
-        <span class="section-tag">Elite Methodology</span>
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 4rem; line-height: 1.1; margin: 20px 0 60px;">Precision is the only<br>metric that matters.</h2>
+  <footer class="site-footer">
+    <div class="footer-info">
+      <p>&copy; 2026 Construct Executive Search. All rights reserved.</p>
     </div>
-
-    <div class="methodology-grid">
-        <div class="service-card reveal">
-            <h3>Executive Search</h3>
-            <p>Discrete, research-driven acquisition of Tier-1 leadership talent across the SADC industrial landscape.</p>
-        </div>
-        <div class="service-card reveal">
-            <h3>Board Advisory</h3>
-            <p>Strategic counsel on board composition, ensuring governance structures are resilient and future-ready.</p>
-        </div>
-        <div class="service-card reveal">
-            <h3>Talent Intelligence</h3>
-            <p>Real-time data on regional salary benchmarks, competitor moves, and emerging leadership trends.</p>
-        </div>
-        <div class="service-card reveal">
-            <h3>Interim Solutions</h3>
-            <p>Deployment of high-impact specialists to bridge critical leadership gaps during institutional transitions.</p>
-        </div>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">LinkedIn</a>
     </div>
-</section>
-
-<section style="padding: 150px 8%; background: var(--emerald-regal); text-align: center;">
-    <div class="reveal">
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; margin-bottom: 40px; font-weight: 300;">Ready to secure your architect?</h2>
-        <button class="btn-premium" onclick="location.href='/contact'">Request a Consultation</button>
-    </div>
-</section>
-
-<script>
-// Improved Reveal Logic
-const revealElements = document.querySelectorAll('.reveal');
-const revealOnScroll = () => {
-    revealElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-            el.classList.add('active');
-        }
-    });
-};
-
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
-</script>
-<style>
-:root {
-    --emerald-obsidian: #001a14;
-    --emerald-regal: #002b21;
-    --gold-leaf: #c5a059;
-    --gold-soft: #e2c999;
-    --ivory-clean: #fcfaf7;
-    --white-pure: #ffffff;
-    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* --- TYPE UPGRADE --- */
-body {
-    background-color: var(--emerald-obsidian);
-    color: var(--ivory-clean);
-    font-family: 'Plus Jakarta Sans', sans-serif; /* Modern, clear, expensive feel */
-    -webkit-font-smoothing: antialiased;
-}
-
-h1, h2, h3 {
-    font-family: 'Cormorant Garamond', serif;
-    letter-spacing: -0.02em;
-}
-
-/* --- HERO ENHANCEMENT --- */
-.hero-content h1 {
-    font-size: clamp(3.5rem, 8vw, 7.5rem); /* Larger, more commanding */
-    font-weight: 300;
-    line-height: 0.95;
-    margin-bottom: 50px;
-    letter-spacing: -1px;
-}
-
-.hero-content h1 span {
-    font-style: italic;
-    font-weight: 400;
-    background: linear-gradient(to right, var(--gold-leaf), var(--gold-soft), var(--gold-leaf));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
-}
-
-/* --- THE "POP" BUTTON --- */
-.btn-premium {
-    background: transparent;
-    color: var(--gold-leaf);
-    border: 1px solid var(--gold-leaf);
-    padding: 20px 45px;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-weight: 600;
-    position: relative;
-    overflow: hidden;
-    transition: 0.5s var(--ease-out-expo);
-    cursor: pointer;
-}
-
-.btn-premium:hover {
-    color: var(--emerald-obsidian);
-    background: var(--gold-leaf);
-    box-shadow: 0 10px 30px rgba(197, 160, 89, 0.3);
-}
-
-/* --- STATS: BORDERLESS & CLEAN --- */
-.floating-stats {
-    display: flex;
-    gap: 80px; /* More breathing room */
-    background: transparent;
-    backdrop-filter: none;
-    border: none;
-    margin-top: 80px;
-    justify-content: center;
-}
-
-.stat-box {
-    background: transparent;
-    padding: 0;
-    position: relative;
-}
-
-.stat-box::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 1px;
-    background: var(--gold-leaf);
-}
-
-.stat-number {
-    font-size: 3.5rem;
-    font-weight: 300;
-    margin-bottom: 5px;
-}
-
-/* --- METHODOLOGY: CORPORATE CLARITY --- */
-.methodology {
-    padding: 180px 12%; /* Increased padding for "luxury" feel */
-}
-
-.section-tag {
-    display: block;
-    margin-bottom: 15px;
-    border-left: 2px solid var(--gold-leaf);
-    padding-left: 15px;
-}
-
-.service-card {
-    border-top: 1px solid rgba(0,0,0,0.05);
-    padding-top: 60px;
-    transition: all 0.6s var(--ease-out-expo);
-}
-
-.service-card h3 {
-    font-size: 2.8rem; /* Pop the titles */
-    color: var(--emerald-regal);
-    margin-bottom: 25px;
-}
-
-.service-card p {
-    font-size: 1.1rem;
-    max-width: 90%;
-    color: #4a4a4a;
-}
-
-/* Subtle "Ink" reveal effect */
-.reveal {
-    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-    mask-size: 100% 200%;
-    mask-position: 0 100%;
-    transition: mask-position 1s var(--ease-out-expo), transform 1s var(--ease-out-expo), opacity 1s;
-}
-
-.reveal.active {
-    mask-position: 0 0;
-    opacity: 1;
-    transform: translateY(0);
-}
-</style>
-
+  </footer>
+</body>
+</html>
 {% endblock %}
